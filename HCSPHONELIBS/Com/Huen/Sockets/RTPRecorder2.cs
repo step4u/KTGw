@@ -7,7 +7,6 @@ using Com.Huen.DataModel;
 using Com.Huen.Sql;
 
 using System.IO;
-using System.Collections.ObjectModel;
 using System.Data;
 using System.Threading;
 using System.Net;
@@ -24,44 +23,60 @@ namespace Com.Huen.Sockets
     {
         private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdefaultpath, Options.appname);
 
-        private HUDPClient client = null;
+        private UdpClient client = null;
         private Socket sockRTPSrv = null;
         private Socket sockCmdSrv = null;
 
         private WaveFormat pcmFormat = new WaveFormat(8000, 16, 1);
 
-        private string seqnum = string.Empty;
-
         private List<RtpRecordInfo> RecordIngList;
 
-        private EndPoint localep;
-        private EndPoint remoteep;
+        private int threadcount = 1;
+        private int port = 21010;
+        private IPEndPoint localep;
+        private IPEndPoint remoteep;
+        private EndPoint localepRedirect;
+        private EndPoint remoteepRedirect;
         private EndPoint localepCmd;
         private EndPoint remoteepCmd;
 
         private bool IsSockInterceptorStarted = false;
         private bool IsSockCmdSrvStarted = false;
 
+        private Thread threadUdpClient;
         private Thread threadIntercept;
 
-        private List<InterceptorClient> cmdClientList = new List<InterceptorClient>();
+        // private List<InterceptorClient> cmdClientList = new List<InterceptorClient>();
         private List<InterceptorClient> rtpRedirectClientList = new List<InterceptorClient>();
-        private List<IPEndPoint> fileClientList = new List<IPEndPoint>();
+        // private List<IPEndPoint> fileClientList = new List<IPEndPoint>();
 
-        public RTPRecorder2() : this (21010)
+        public RTPRecorder2() : this (21010, 1)
         {
         }
 
-        public RTPRecorder2(int port)
+        public RTPRecorder2(int port) : this (port, 1)
         {
+        }
+
+        public RTPRecorder2(int port, int threadcount)
+        {
+            this.threadcount = threadcount;
+            this.port = port;
+
             this.ReadIni();
 
             RecordIngList = new List<RtpRecordInfo>();
 
-            client = new HUDPClient();
-            client.UDPClientEventReceiveMessage += client_UDPClientEventReceiveMessage;
+            remoteep = new IPEndPoint(IPAddress.Any, 0);
+            localep = new IPEndPoint(IPAddress.Any, this.port);
+            client = new UdpClient(localep);
 
-            client.ServerPort = port;
+            for(int i = 0; i < this.threadcount; i++)
+            {
+                threadUdpClient = new Thread(new ThreadStart(SendReceiveMsg));
+                threadUdpClient.IsBackground = true;
+                threadUdpClient.Start();
+            }
         }
 
         private void ReadIni()
@@ -90,11 +105,11 @@ namespace Com.Huen.Sockets
         #region RTP Redirect Server s
         public void StartRtpRedirectSrv()
         {
-            localep = new IPEndPoint(IPAddress.Any, 21020);
-            remoteep = new IPEndPoint(IPAddress.Any, 0);
+            localepRedirect = new IPEndPoint(IPAddress.Any, 21020);
+            remoteepRedirect = new IPEndPoint(IPAddress.Any, 0);
 
             sockRTPSrv = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-            sockRTPSrv.Bind(localep);
+            sockRTPSrv.Bind(localepRedirect);
 
             IsSockInterceptorStarted = true;
 
@@ -122,7 +137,7 @@ namespace Com.Huen.Sockets
                     byte[] bytes = util.ObjectToByteArray(req);
 
                     count = 0;
-                    count = sockRTPSrv.ReceiveFrom(bytes, SocketFlags.None, ref remoteep);
+                    count = sockRTPSrv.ReceiveFrom(bytes, SocketFlags.None, ref remoteepRedirect);
 
                     if (count == 0) return;
 
@@ -165,9 +180,9 @@ namespace Com.Huen.Sockets
                     }
                 }
             }
-            catch (SocketException se)
+            catch (SocketException e)
             {
-                throw se;
+                throw e;
             }
         }
         #endregion RTP Redirect Server e
@@ -258,22 +273,31 @@ namespace Com.Huen.Sockets
         }
         #endregion Command Server e
 
-        public void StartServer()
+        private void SendReceiveMsg()
         {
-            client.StartServer();
+            try
+            {
+                while (true)
+                {
+                    byte[] buffer = client.Receive(ref remoteep);
+
+                    if (buffer.Length > 0)
+                    {
+                        RtpReceive(buffer);
+                    }
+                }
+            }
+            catch (System.Net.Sockets.SocketException e)
+            {
+                util.WriteLogTest2(e.ErrorCode + " : " + e.Message);
+                threadUdpClient.Abort();
+            }
         }
 
-        public void StopServer()
-        {
-            client.Stop();
-        }
-
-        void client_UDPClientEventReceiveMessage(object sender, byte[] buffer)
+        private void RtpReceive(byte[] buffer)
         {
             RecordInfo_t recInfo = util.GetObject<RecordInfo_t>(buffer);
-
             int nDataSize = recInfo.size - 12;
-
             if (nDataSize != 80 && nDataSize != 160 && nDataSize != 240 && nDataSize != -12) return;
 
             // util.WriteLog(string.Format("seq:{0}, ext:{1}, peer:{2}, isExtension:{3}, size:{4}, bytesLength:{5}", recInfo.seq, recInfo.peer_number, recInfo.extension, recInfo.isExtension, recInfo.size - 12, recInfo.voice.Length));
@@ -463,7 +487,6 @@ namespace Com.Huen.Sockets
             this.sockRTPSrv.Close();
             this.sockCmdSrv.Close();
 
-            this.client.Dispose();
             this.sockRTPSrv.Dispose();
             this.sockCmdSrv.Dispose();
 

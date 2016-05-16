@@ -32,7 +32,6 @@ namespace CallRecorder
             //try
             //{
                 recorder = new RTPRecorder2();
-                recorder.StartServer();
                 //_recorder.StartCmdSrv();
                 //_recorder.StartRtpRedirectSrv();
 

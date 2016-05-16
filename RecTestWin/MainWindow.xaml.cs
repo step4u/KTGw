@@ -34,7 +34,6 @@ namespace RecTestWin
             try
             {
                 _recorder = new RTPRecorder2();
-                _recorder.StartServer();
                 //_recorder.StartCmdSrv();
                 //_recorder.StartRtpRedirectSrv();
 
