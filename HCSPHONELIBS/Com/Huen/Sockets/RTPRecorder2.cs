@@ -16,7 +16,6 @@ using NAudio.Wave;
 using System.Diagnostics;
 using FirebirdSql.Data.FirebirdClient;
 
-
 namespace Com.Huen.Sockets
 {
     public class RTPRecorder2 : IDisposable
