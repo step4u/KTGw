@@ -1,0 +1,107 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:datamodel="clr-namespace:Com.Huen.DataModel"
+             xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+             xmlns:UserControls="clr-namespace:Com.Huen.UserControls"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Com.Huen.UserControls.ChildrenInfo"
+             mc:Ignorable="d" Padding="0,0,0,0" d:DesignWidth="430" Height="180.96">
+    <UserControl.Resources>
+        <datamodel:GroupLists x:Key="cb_GroupList"/>
+        <datamodel:Sexes x:Key="comboSex"/>
+        <datamodel:GraduateCombo x:Key="comboGraduate"/>
+
+        <Style x:Key="myHeaderStyle" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Visibility" Value="Collapsed" />
+        </Style>
+
+        <!--Storyboard x:Key="gridAttention_ON">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridAttention">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="gridAttention">
+				<EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+				<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="21"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard>
+		<Storyboard x:Key="gridAttention_OFF">
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gridAttention">
+				<SplineDoubleKeyFrame KeyTime="0" Value="1"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+			<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="gridAttention">
+				<SplineDoubleKeyFrame KeyTime="0" Value="21"/>
+				<SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+			</DoubleAnimationUsingKeyFrames>
+		</Storyboard-->
+
+    </UserControl.Resources>
+    <Grid Background="White">
+        <Label Content="이름" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,5,0,0"/>
+        <TextBox x:Name="chName" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Margin="63,7,0,0"/>
+        <Label Content="성별" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,32,0,0"/>
+        <ComboBox x:Name="chSex" DataContext="{StaticResource comboSex}" ItemsSource="{Binding GetComboSex}" DisplayMemberPath="S_Name" SelectedValuePath="S_Idx" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="44" Margin="63,34,0,0" RenderTransformOrigin="4.205,-1.182"/>
+        <Label Content="생년월일" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,59,0,0"/>
+        <Custom:DatePicker x:Name="chBirth" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,60,0,0" Width="100" SelectedDate="{x:Static sys:DateTime.Now}" Focusable="False"/>
+        <Label Content="입학일" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,88,0,0"/>
+        <Custom:DatePicker x:Name="chEnter" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="63,89,0,0" Width="100" SelectedDate="{x:Static sys:DateTime.Now}" Focusable="False"/>
+        <Label Content="졸업" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,114,0,0"/>
+        <ComboBox x:Name="chGraduate" DataContext="{StaticResource comboGraduate}" ItemsSource="{Binding GetComboList}" DisplayMemberPath="Name" SelectedValuePath="Idx" SelectedIndex="0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="55" Margin="63,118,0,0"/>
+        <Label Content="반배정" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,142,0,0"/>
+        <ComboBox x:Name="cmbGroup" Margin="63,145,0,13" HorizontalAlignment="Left" Width="100" ItemsSource="{StaticResource cb_GroupList}" DisplayMemberPath="Cstg_Name" SelectedValuePath="Cstg_Idx" SelectedIndex="0" TabIndex="1"/>
+        <Label Content="주의사항" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="174,5,0,0"/>
+        <UserControls:ButtonPlus2 x:Name="buttonPlus2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="233,12,0,0" Width="12" Height="12" Panel.ZIndex="1" PreviewMouseLeftButtonUp="buttonPlus2_PreviewMouseLeftButtonUp"/>
+        <ListView x:Name="listAttention" HorizontalAlignment="Left" Height="132" VerticalAlignment="Top" Width="224" Margin="177,36,0,0" ContextMenuOpening="listAttention_ContextMenuOpening">
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="삭제(_D)" Click="MenuItem_Click"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource myHeaderStyle}">
+                    <GridViewColumn Header="제목">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=EVT_TITLE}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="내용">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Path=EVT_MEMO}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <!--Grid x:Name="gridAttention" Height="33" VerticalAlignment="Top" Margin="234,1.75,0,0" RenderTransformOrigin="0.5,0.5" Opacity="0" HorizontalAlignment="Left" Width="160">
+        	<Grid.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform/>
+        			<SkewTransform/>
+        			<RotateTransform/>
+        			<TranslateTransform/>
+        		</TransformGroup>
+        	</Grid.RenderTransform>
+        	<Rectangle x:Name="rectangle" HorizontalAlignment="Left" Height="31" VerticalAlignment="Top" Width="160" RadiusY="2.167" RadiusX="2.167" Fill="White"/>
+        	<Grid Margin="3,4.083,5.667,5.917">
+        		<Rectangle HorizontalAlignment="Left" Height="23" VerticalAlignment="Top" Width="151.333" RadiusY="1.5" Stroke="#FF828790" RadiusX="1.5">
+        			<Rectangle.Effect>
+        				<DropShadowEffect BlurRadius="1" Color="#FFC3C3C3" ShadowDepth="1"/>
+        			</Rectangle.Effect>
+        		</Rectangle>
+        		<TextBox x:Name="txtAttention" HorizontalAlignment="Left" Height="17" TextWrapping="Wrap" VerticalAlignment="Top" Width="143.917" Margin="4.25,3.5,0,0" BorderThickness="0" Background="{x:Null}" Padding="3,0" KeyUp="txtAttention_KeyUp" KeyDown="txtAttention_KeyDown"/>
+        	</Grid>
+        </Grid-->
+    </Grid>
+</UserControl>

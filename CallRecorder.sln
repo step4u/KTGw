@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMMONRES", "COMMONRES\COMMONRES.csproj", "{478F73B6-4103-41EF-9CD1-085335C51FE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCSPHONELIBS", "HCSPHONELIBS\HCSPHONELIBS.csproj", "{32BBA895-47EA-416C-98E1-9F6680F5AAF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallRecorderAgent", "CallRecorderAgent\CallRecorderAgent.csproj", "{D20B42FC-171C-46EC-88A5-CD6608109C17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecTestWin", "RecTestWin\RecTestWin.csproj", "{2007D0AB-6D6F-421E-AEF4-56D1A5396215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallInterceptor", "CallInterceptor\CallInterceptor.csproj", "{6CC09F6E-F676-442E-A72E-D82EBDFB8450}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallRecorder", "CallRecorder\CallRecorder.csproj", "{DC10FBC7-49D3-4992-A9B7-E2B213F59540}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{478F73B6-4103-41EF-9CD1-085335C51FE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{478F73B6-4103-41EF-9CD1-085335C51FE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{478F73B6-4103-41EF-9CD1-085335C51FE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{478F73B6-4103-41EF-9CD1-085335C51FE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32BBA895-47EA-416C-98E1-9F6680F5AAF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32BBA895-47EA-416C-98E1-9F6680F5AAF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32BBA895-47EA-416C-98E1-9F6680F5AAF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32BBA895-47EA-416C-98E1-9F6680F5AAF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D20B42FC-171C-46EC-88A5-CD6608109C17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D20B42FC-171C-46EC-88A5-CD6608109C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D20B42FC-171C-46EC-88A5-CD6608109C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D20B42FC-171C-46EC-88A5-CD6608109C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2007D0AB-6D6F-421E-AEF4-56D1A5396215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2007D0AB-6D6F-421E-AEF4-56D1A5396215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2007D0AB-6D6F-421E-AEF4-56D1A5396215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2007D0AB-6D6F-421E-AEF4-56D1A5396215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CC09F6E-F676-442E-A72E-D82EBDFB8450}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CC09F6E-F676-442E-A72E-D82EBDFB8450}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CC09F6E-F676-442E-A72E-D82EBDFB8450}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CC09F6E-F676-442E-A72E-D82EBDFB8450}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

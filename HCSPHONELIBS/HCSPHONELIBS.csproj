@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{32BBA895-47EA-416C-98E1-9F6680F5AAF9}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>com</RootNamespace>
+    <AssemblyName>HCSPHONELIBS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
+      <HintPath>..\..\..\..\..\..\..\NETProvider-3.0.2.0-NET40\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>..\..\Sources\C#_Samples\wpf-notifyicon\wpf-notifyicon\Sample Project\bin\Release\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=1.7.0.15, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\NAudio-Source\NAudio\bin\Debug\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="system.windows.controls.layout.toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="xceed.wpf.toolkit">
+      <HintPath>..\..\extendedwpftoolkit_binaries\xceed.wpf.toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Com\Huen\Commands\CommandBase.cs" />
+    <Compile Include="Com\Huen\Commands\ServiceStopCommand.cs" />
+    <Compile Include="Com\Huen\Commands\ServiceStartCommand.cs" />
+    <Compile Include="Com\Huen\Commands\ExitCallRecoderAgentCommand.cs" />
+    <Compile Include="Com\Huen\Commands\HideCallRecorderAgentCommand.cs" />
+    <Compile Include="Com\Huen\Commands\ShowCallRecorderAgentCommand.cs" />
+    <Compile Include="Com\Huen\Controldata\HospitalInfo.cs" />
+    <Compile Include="Com\Huen\Converter\CallStatusChangeFontColor.cs" />
+    <Compile Include="Com\Huen\Converter\CallStatusChk.cs" />
+    <Compile Include="Com\Huen\Converter\CallStatusFontWeight.cs" />
+    <Compile Include="Com\Huen\Converter\BirthStatus.cs" />
+    <Compile Include="Com\Huen\Converter\SelAllChangeBold.cs" />
+    <Compile Include="Com\Huen\Converter\Tel2CustInfo.cs" />
+    <Compile Include="Com\Huen\Converter\IndexConverter4Paging.cs" />
+    <Compile Include="Com\Huen\Converter\FeeDelay.cs" />
+    <Compile Include="Com\Huen\Converter\FeeDelayColor.cs" />
+    <Compile Include="Com\Huen\Converter\FeeStatus.cs" />
+    <Compile Include="Com\Huen\Converter\IndexConverter.cs" />
+    <Compile Include="Com\Huen\Converter\WordShorter.cs" />
+    <Compile Include="Com\Huen\DataModel\Caller.cs" />
+    <Compile Include="Com\Huen\DataModel\CallingList.cs" />
+    <Compile Include="Com\Huen\DataModel\CheckShareWare.cs" />
+    <Compile Include="Com\Huen\DataModel\CRInterceptOption.cs" />
+    <Compile Include="Com\Huen\DataModel\Interview.cs" />
+    <Compile Include="Com\Huen\DataModel\Company.cs" />
+    <Compile Include="Com\Huen\DataModel\InterceptorClient.cs" />
+    <Compile Include="Com\Huen\DataModel\CRAgentOption.cs" />
+    <Compile Include="Com\Huen\DataModel\CBDepartList.cs" />
+    <Compile Include="Com\Huen\DataModel\CBDutyList.cs" />
+    <Compile Include="Com\Huen\DataModel\ChildInfo.cs" />
+    <Compile Include="Com\Huen\DataModel\AlarmBirth.cs" />
+    <Compile Include="Com\Huen\DataModel\AlarmAttention.cs" />
+    <Compile Include="Com\Huen\DataModel\AppProperty0.cs" />
+    <Compile Include="Com\Huen\DataModel\EventSchedule.cs" />
+    <Compile Include="Com\Huen\DataModel\Graduate.cs" />
+    <Compile Include="Com\Huen\DataModel\InnerTel.cs" />
+    <Compile Include="Com\Huen\DataModel\MonthFee.cs" />
+    <Compile Include="Com\Huen\DataModel\Options.cs" />
+    <Compile Include="Com\Huen\DataModel\Parent.cs" />
+    <Compile Include="Com\Huen\DataModel\ProductRegisterInfo.cs" />
+    <Compile Include="Com\Huen\DataModel\RcvData.cs" />
+    <Compile Include="Com\Huen\DataModel\ReceivedRtp.cs" />
+    <Compile Include="Com\Huen\DataModel\RecInfos.cs" />
+    <Compile Include="Com\Huen\DataModel\RtpRecordInfo.cs" />
+    <Compile Include="Com\Huen\DataModel\SearchConditions.cs" />
+    <Compile Include="Com\Huen\DataModel\SetSearchTime.cs" />
+    <Compile Include="Com\Huen\DataModel\Sex.cs" />
+    <Compile Include="Com\Huen\DataModel\Customers.cs" />
+    <Compile Include="Com\Huen\DataModel\FamilyRole.cs" />
+    <Compile Include="Com\Huen\DataModel\GroupList.cs" />
+    <Compile Include="Com\Huen\DataModel\Customer.cs" />
+    <Compile Include="Com\Huen\DataModel\DepartmentViewModel.cs" />
+    <Compile Include="Com\Huen\DataModel\DepartmentTreeViewModel.cs" />
+    <Compile Include="Com\Huen\DataModel\Department.cs" />
+    <Compile Include="Com\Huen\DataModel\CustGroup.cs" />
+    <Compile Include="Com\Huen\DataModel\CustGroupTreeViewModel.cs" />
+    <Compile Include="Com\Huen\DataModel\CustGroupViewModel.cs" />
+    <Compile Include="Com\Huen\DataModel\Employee.cs" />
+    <Compile Include="Com\Huen\DataModel\LGuMessage.cs" />
+    <Compile Include="Com\Huen\Controldata\Statistics.cs" />
+    <Compile Include="Com\Huen\Converter\CallforToImage.cs" />
+    <Compile Include="Com\Huen\Converter\DayByMonth.cs" />
+    <Compile Include="Com\Huen\CustomControl1.cs" />
+    <Compile Include="Com\Huen\Controldata\CallListData.cs" />
+    <Compile Include="Com\Huen\Controldata\CallList.cs" />
+    <Compile Include="Com\Huen\DataModel\AppProperty.cs" />
+    <Compile Include="Com\Huen\DataModel\LoginProperty.cs" />
+    <Compile Include="Com\Huen\DataModel\Sms.cs" />
+    <Compile Include="Com\Huen\DataModel\SMSPeer.cs" />
+    <Compile Include="Com\Huen\DataModel\Student.cs" />
+    <Compile Include="Com\Huen\DataModel\UserInfo.cs" />
+    <Compile Include="Com\Huen\Data\EmployeeList.cs" />
+    <Compile Include="Com\Huen\Libs\CompareRtpSeq.cs" />
+    <Compile Include="Com\Huen\Libs\CustGroupComparer.cs" />
+    <Compile Include="Com\Huen\Libs\DepartComparer.cs" />
+    <Compile Include="Com\Huen\Libs\FixedWidthColumn.cs" />
+    <Compile Include="Com\Huen\Libs\Ini.cs" />
+    <Compile Include="Com\Huen\Libs\IsExtensionComparer.cs" />
+    <Compile Include="Com\Huen\Libs\StrComparer.cs" />
+    <Compile Include="Com\Huen\Media\ReadFullyStream.cs" />
+    <Compile Include="Com\Huen\Media\WaveFileWriter.cs" />
+    <Compile Include="Com\Huen\Sockets\FileTransferServer2.cs" />
+    <Compile Include="Com\Huen\Sockets\FileTransferServer.cs" />
+    <Compile Include="Com\Huen\Sockets\Header.cs" />
+    <Compile Include="Com\Huen\Sockets\HUDPClient.cs" />
+    <Compile Include="Com\Huen\Sockets\RTPRecorder2.cs" />
+    <Compile Include="Com\Huen\Sockets\RTPRecorder.cs" />
+    <Compile Include="Com\Huen\Sql\ExcelHelper.cs" />
+    <Compile Include="Com\Huen\Libs\DllResources.cs" />
+    <Compile Include="Com\Huen\Sql\FirebirdDBHelper.cs" />
+    <Compile Include="Com\Huen\Sql\MSDBHelper.cs" />
+    <Compile Include="Com\Huen\UserControls\AlarmControl.xaml.cs">
+      <DependentUpon>AlarmControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\ButtonAlarmBirthWithCount.xaml.cs">
+      <DependentUpon>ButtonAlarmBirthWithCount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\ButtonPlus2.xaml.cs">
+      <DependentUpon>ButtonPlus2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\ButtonMinus.xaml.cs">
+      <DependentUpon>ButtonMinus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\ChildrenInfo.xaml.cs">
+      <DependentUpon>ChildrenInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\ButtonX.xaml.cs">
+      <DependentUpon>ButtonX.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\CustGroupTreeViewControl.xaml.cs">
+      <DependentUpon>CustGroupTreeViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\DepartTreeViewControl.xaml.cs">
+      <DependentUpon>DepartTreeViewControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\Eraser.xaml.cs">
+      <DependentUpon>Eraser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\FamilyTel.xaml.cs">
+      <DependentUpon>FamilyTel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\FancyBalloon.xaml.cs">
+      <DependentUpon>FancyBalloon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\UserControls\divEventControl.xaml.cs">
+      <DependentUpon>divEventControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Com\Huen\Sockets\SocketStruct.cs" />
+    <Compile Include="Com\Huen\Libs\util.cs" />
+    <Compile Include="Views\CallRecorderAgent.xaml.cs">
+      <DependentUpon>CallRecorderAgent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InnerTelWin.xaml.cs">
+      <DependentUpon>InnerTelWin.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\SearchNintercept.xaml.cs">
+      <DependentUpon>SearchNintercept.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchProperties.xaml.cs">
+      <DependentUpon>SearchProperties.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Com\Huen\UserControls\AlarmControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Com\Huen\UserControls\ButtonAlarmBirthWithCount.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\ButtonPlus2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Com\Huen\UserControls\ButtonMinus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Com\Huen\UserControls\ChildrenInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\ButtonX.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Com\Huen\UserControls\CustGroupTreeViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\DepartTreeViewControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\Eraser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\FamilyTel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Com\Huen\UserControls\FancyBalloon.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Com\Huen\UserControls\divEventControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Com\Huen\Libs\ApplicationEnums.cs" />
+    <Page Include="ResourceDictionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CallRecorderAgent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InnerTelWin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchNintercept.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SearchProperties.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Com\Huen\Sockets\UDPSocketClient.cs" />
+    <Compile Include="Com\Huen\Libs\ModifyRegistry.cs" />
+    <Compile Include="Com\Huen\Sql\OLEDBHelper.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\COMMONRES\COMMONRES.csproj">
+      <Project>{478f73b6-4103-41ef-9cd1-085335c51fe5}</Project>
+      <Name>COMMONRES</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\folder_close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\folder_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\IDB_BANNER_001.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\incomming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bg_standalone.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_01_disable.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_01_off.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_01_on.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_02_disable.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_02_off.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_02_on.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_05_disable.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_05_off.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\login_bt_05_on.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\outgoing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Com\Huen\Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

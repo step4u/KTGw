@@ -1,0 +1,29 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:UserControls="clr-namespace:Com.Huen.UserControls"
+	mc:Ignorable="d"
+	x:Class="Com.Huen.UserControls.AlarmControl"
+	x:Name="UserControl"
+	d:DesignWidth="216" d:DesignHeight="528">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid x:Name="grid_alarm" HorizontalAlignment="Right" Width="216">
+			<Rectangle Fill="#FFF4F4F5" Stroke="#FFBBBFC4"/>
+			<TabControl x:Name="tab_alarm" Margin="10">
+				<TabItem x:Name="tab_alarm0" Header="생일자">
+					<Grid/>
+				</TabItem>
+				<TabItem x:Name="tab_alarm1" Header="주의사항">
+					<Grid/>
+				</TabItem>
+				<TabItem x:Name="tab_alarm2" Header="원비납부">
+					<Grid/>
+				</TabItem>
+			</TabControl>
+			<UserControls:ButtonX x:Name="btnCloseAlarm" Height="12" Width="12" Margin="0,5,5,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+		</Grid>
+	</Grid>
+</UserControl>

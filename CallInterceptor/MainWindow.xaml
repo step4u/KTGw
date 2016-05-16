@@ -1,0 +1,14 @@
+﻿<Window x:Class="CallInterceptor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button Content="Reg Request" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="10,10,0,0" Click="Button_Click"/>
+        <Button Content="Intercept Request" HorizontalAlignment="Left" VerticalAlignment="Top" Width="125" Margin="140,10,0,0" Click="Button_Click_1"/>
+        <StatusBar Height="20" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="statustxt0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

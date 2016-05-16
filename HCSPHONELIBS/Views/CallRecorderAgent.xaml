@@ -1,0 +1,81 @@
+﻿<Window x:Class="Com.Huen.Views.CallRecorderAgent"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
+        xmlns:commands="clr-namespace:Com.Huen.Commands"
+        Title="Call Recorder Agent" Height="400" Width="400" ResizeMode="NoResize" Icon="/HCSPHONELIBS;component/icon.ico" WindowStartupLocation="CenterScreen">
+    <!--<Window.Resources>
+        <ContextMenu x:Key="tbMenu">
+            <MenuItem IsEnabled="False" Header="{Binding ToolTipText}"/>
+            <MenuItem Header="환경 설정" Command="{commands:ShowCallRecorderAgentCommand}" CommandParameter="{Binding}"/>
+            <Separator />
+            <MenuItem Header="서비스 시작" Command="{commands:ServiceStartCommand}" CommandParameter="{Binding}"/>
+            <MenuItem Header="서비스 정지" Command="{commands:ServiceStopCommand}" CommandParameter="{Binding}"/>
+            <Separator />
+            <MenuItem x:Name="tbMenu_Exit" Header="종료" Command="{commands:ExitCallRecoderAgentCommand}" CommandParameter="{Binding}"/>
+        </ContextMenu>
+    </Window.Resources>-->
+    <Grid>
+        <!--<tb:TaskbarIcon
+			x:Name="tb"
+			IconSource="/HCSPHONELIBS;component/icon.ico"
+			ContextMenu="{DynamicResource tbMenu}"
+			ToolTipText="Call recorder agent"
+			Visibility="Visible"
+			MenuActivation="RightClick"/>-->
+
+        <TabControl Focusable="False" TabStripPlacement="Left">
+            <TabItem Header="기본 설정">
+                <Grid Background="White">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="파일 형식" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="14"/>
+                    <RadioButton x:Name="fileWav" Content="WAV" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,45,0,0" GroupName="savefile" IsChecked="True" Click="filetype_Click"/>
+                    <RadioButton x:Name="fileMp3" Content="MP3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,45,0,0" GroupName="savefile" Click="filetype_Click"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="디렉터리" VerticalAlignment="Top" Margin="15,90,0,0" FontSize="14"/>
+                    <TextBox x:Name="txtSelDir" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162" Margin="41,125,0,0" IsReadOnly="True"/>
+                    <Button x:Name="btnSelDir" Content="선택" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="208,125,0,0" Click="btnSelDir_Click"/>
+
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,175,0,0" FontSize="14"><Run Language="ko-kr" Text="Database Server IP"/></TextBlock>
+                    <TextBox x:Name="txtDBip" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" MaxLength="15" VerticalAlignment="Top" Width="162" Margin="41,209,0,0"/>
+
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,262,0,0" FontSize="14"><Run Language="ko-kr" Text="Call Record Agent 자동 시작"/></TextBlock>
+                    <CheckBox x:Name="chk_agentautostart" Content="Windows 시작 시 자동 실행" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,298,0,0" IsChecked="True" IsThreeState="False" Checked="chk_agentautostart_Checked" Unchecked="chk_agentautostart_Unchecked"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="FTP 설정" Visibility="Collapsed">
+                <Grid Background="White">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="자동 전송" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="14"/>
+                    <RadioButton x:Name="ftpRa0" Content="사용" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,45,0,0" GroupName="ftp_autotrans"/>
+                    <RadioButton x:Name="ftpRa1" Content="미사용" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,45,0,0" GroupName="ftp_autotrans" IsChecked="True"/>
+                    <TextBlock x:Name="ftpAddrTitle" HorizontalAlignment="Left" TextWrapping="Wrap" Text="FTP 주소" VerticalAlignment="Top" FontSize="14" IsEnabled="False" Margin="15,90,0,0"/>
+                    <TextBox x:Name="ftpAddr" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="206" Margin="96,90,0,0" MaxLength="15"/>
+                    <TextBlock x:Name="ftpAccountTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,133,0,0" FontSize="14"><Run Language="ko-kr" Text="계정"/></TextBlock>
+                    <TextBox x:Name="ftpAccount" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="206" Margin="96,132,0,0" MaxLength="15"/>
+                    <TextBlock x:Name="ftpPassTitle" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,179,0,0" FontSize="14"><Run Language="ko-kr" Text="비밀번호"/></TextBlock>
+                    <PasswordBox x:Name="ftpPass" HorizontalAlignment="Left" VerticalAlignment="Top" Width="206" Margin="96,178,0,0" Height="20"/>
+                    <TextBlock x:Name="ftpPassTitle1" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,222,0,0" FontSize="14"><Run Language="ko-kr" Text="전송 모드"/></TextBlock>
+                    <RadioButton x:Name="ftpMode0" Content="Active" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="96,224,0,0" GroupName="ftp_mode" IsChecked="True"/>
+                    <RadioButton x:Name="ftpMode1" Content="Passive" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="191,224,0,0" GroupName="ftp_mode"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="내선 설정" Visibility="Collapsed">
+                <Grid Background="White">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="내선 리스트" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="14"/>
+                    <ListView x:Name="innerTelList" Margin="0,34,0,0" ContextMenuOpening="innerTelList_ContextMenuOpening">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="innertel_menu0" Header="추가(_A)" Click="innertel_menu0_Click"></MenuItem>
+                                <MenuItem x:Name="innertel_menu1" Header="삭제(_D)" Click="innertel_menu1_Click"></MenuItem>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header=" 내선번호 "/>
+                                <GridViewColumn Header=" 담당자 "/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

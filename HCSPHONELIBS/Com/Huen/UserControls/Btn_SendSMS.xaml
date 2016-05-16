@@ -1,0 +1,25 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="Com.Huen.UserControls.Btn_SendSMS"
+	x:Name="UserControl"
+	d:DesignWidth="108" d:DesignHeight="26">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid>
+			<Rectangle Fill="#80A8A0" HorizontalAlignment="Left" Height="26" VerticalAlignment="Top" Width="108" RadiusY="12.167" RadiusX="12.167"/>
+			<Rectangle HorizontalAlignment="Left" Height="21.665" Margin="2.167,2.501,0,0" VerticalAlignment="Top" Width="103.166" RadiusY="12.167" RadiusX="12.167">
+				<Rectangle.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF189CA8" Offset="0"/>
+						<GradientStop Color="#FF133A73" Offset="1"/>
+					</LinearGradientBrush>
+				</Rectangle.Fill>
+			</Rectangle>
+			<Rectangle HorizontalAlignment="Left" Height="12.666" Margin="4.665,3.336,0,0" RadiusY="10.335" RadiusX="10.335" VerticalAlignment="Top" Width="97.333" Fill="#FF77C5CF"/>
+		</Grid>
+	</Grid>
+</UserControl>

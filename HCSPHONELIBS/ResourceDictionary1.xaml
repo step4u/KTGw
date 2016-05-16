@@ -1,0 +1,92 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	<Style x:Key="btnArrow" TargetType="{x:Type Button}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="OnClick1">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.7"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.7"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Grid x:Name="grid" RenderTransformOrigin="0.5,0.5">
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.RenderTransform>
+						<Path Data="M0,0 L34.651749,20.006193 0.023187081,39.999001 0,39.999001 z" Fill="Black" HorizontalAlignment="Stretch" Height="Auto" Stretch="Fill" Stroke="Black" StrokeThickness="0" VerticalAlignment="Stretch" Width="Auto" Margin="0"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="ButtonBase.Click">
+							<BeginStoryboard Storyboard="{StaticResource OnClick1}"/>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<Style x:Key="btnRefresh1" TargetType="{x:Type Button}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}">
+					<ControlTemplate.Resources>
+						<Storyboard x:Key="OnMouseLeftButtonDown1">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-37"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="OnMouseLeftButtonUp1">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="grid">
+								<SplineDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+						<Storyboard x:Key="OnClick1">
+							<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[2].(RotateTransform.Angle)" Storyboard.TargetName="grid">
+								<EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-35"/>
+								<EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+							</DoubleAnimationUsingKeyFrames>
+						</Storyboard>
+					</ControlTemplate.Resources>
+					<Grid x:Name="grid" RenderTransformOrigin="0.5,0.578">
+						<Grid.RenderTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</Grid.RenderTransform>
+						<Path x:Name="path" Data="M47.538384,0.5 L47.538384,17.403994 48.423848,17.460108 C71.400704,19.208385 89.500001,38.405708 89.500001,61.830349 89.500001,86.407017 69.576668,106.33035 45.000001,106.33035 20.423329,106.33035 0.50000158,86.407017 0.5,61.830349 0.50000158,54.918159 2.075968,48.374058 4.8881843,42.53776 L5.2837436,41.741762 16.871926,48.432203 16.601691,49.010983 C14.834007,52.920727 13.850002,57.260624 13.850003,61.830349 13.850002,79.034019 27.79633,92.98035 45.000001,92.98035 62.203671,92.98035 76.150002,79.034019 76.150002,61.830349 76.150002,45.701908 63.892483,32.436363 48.184907,30.841172 L47.538384,30.783761 47.538384,49.997475 22.789647,25.248738 z" Fill="Black" Stretch="Fill" Stroke="Black" RenderTransformOrigin="0.5,0.578">
+							<Path.RenderTransform>
+								<TransformGroup>
+									<ScaleTransform/>
+									<SkewTransform/>
+									<RotateTransform/>
+									<TranslateTransform/>
+								</TransformGroup>
+							</Path.RenderTransform>
+						</Path>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<EventTrigger RoutedEvent="ButtonBase.Click">
+							<BeginStoryboard x:Name="OnClick1_BeginStoryboard" Storyboard="{StaticResource OnClick1}"/>
+						</EventTrigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+	<!-- Resource dictionary entries should be defined here. -->
+</ResourceDictionary>

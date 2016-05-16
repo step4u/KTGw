@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{478F73B6-4103-41EF-9CD1-085335C51FE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>COMMONRES</RootNamespace>
+    <AssemblyName>COMMONRES</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\IDB_BANNER_001.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\incomming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outgoing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_statis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_incomming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_outgoing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_props.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_completed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_plus0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\btn_plus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_plus1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_example.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smartphone1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smartphone2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smartphone3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\preferences.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\precaut.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\set.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sms.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bday.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_att.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_cake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_options.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_smses.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ic_won.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_attention.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_cake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_currency.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ico_sms.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

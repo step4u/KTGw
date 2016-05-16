@@ -1,0 +1,105 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:dm="clr-namespace:Com.Huen.DataModel"
+        xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        x:Class="Com.Huen.Views.SearchProperties"
+        Title="환경설정" Height="300" Width="300" Icon="/HCSPHONELIBS;component/icon.ico" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Grid>
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="내선설정">
+                <Grid Background="#FFE5E5E5">
+                    <ListView x:Name="lv_innertel" SelectionMode="Single" ContextMenuOpening="lv_innertel_ContextMenuOpening">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem x:Name="tab0ContextMenuAdd" Header="추가(_A)" Click="tab0ContextMenuAdd_Click"/>
+                                <MenuItem x:Name="tab0ContextMenuModi" Header="수정(_M)" Click="tab0ContextMenuModi_Click"/>
+                                <MenuItem x:Name="tab0ContextMenuDel" Header="삭제(_D)" Click="tab0ContextMenuDel_Click"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header=" 내선번호 ">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock Text="{Binding Telnum}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header=" 담당자 ">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <TextBlock Text="{Binding TellerName}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!--<DataGrid x:Name="dr_inntertel" Background="White" AutoGenerateColumns="False" DataContext="{StaticResource innertels}" ItemsSource="{Binding GetList}" AlternatingRowBackground="Gainsboro"  AlternationCount="2">
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn Header=" 내선번호 " Width="65">
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Path=Telnum}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                                
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=Telnum}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTemplateColumn Header=" 상담원 " Width="65">
+                                <DataGridTemplateColumn.CellEditingTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Path=TellerName}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellEditingTemplate>
+                                
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=TellerName}"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>-->
+
+                    <!--<Custom:DataGrid x:Name="datagrid1" AutoGenerateColumns="False" DataContext="{StaticResource innertels}" ItemsSource="{Binding GetList}" AlternatingRowBackground="Gainsboro"  AlternationCount="2"
+                                     CommandManager.PreviewExecuted="datagrid1_PreviewDeleteCommandHandler">
+                        <Custom:DataGrid.Columns>
+                            <Custom:DataGridTextColumn Header=" 내선번호 " Binding="{Binding Telnum}"/>
+                            <Custom:DataGridTextColumn Header=" 상담자이름 " Binding="{Binding TellerName}"/>
+                        </Custom:DataGrid.Columns>
+                    </Custom:DataGrid>-->
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="기타">
+                <Grid Background="#FFF">
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,17,0,0" FontSize="14" Text="PBX IP"/>
+                    <!--xctk:MaskedTextBox x:Name="txtSrvIP" HorizontalAlignment="Left" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="20" Mask="990.990.990.990" MaxLength="16" KeyUp="txtSrvIP_KeyUp"/-->
+                    <TextBox x:Name="txtPbxSrvIP" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="154" MaxLength="15" Margin="10,41,0,0" />
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,66,0,0" FontSize="14"><Run Text="DB"/><Run Text=" Server"/></TextBlock>
+                    <TextBox x:Name="txtDBSrvIP" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="154" Margin="10,90,0,0" MaxLength="15"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="10,116,0,0" FontSize="14" Text="Record Server"/>
+                    <TextBox x:Name="txtRecSrvIP" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="154" Margin="10,140,0,0" MaxLength="15"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="다운로드 폴더" VerticalAlignment="Top" Margin="10,170,0,0" FontSize="14"/>
+                    <TextBox x:Name="txtSelDir" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="154" Margin="10,194,0,0" IsReadOnly="True"/>
+                    <Button x:Name="btnSelDir" Content="선택" HorizontalAlignment="Left" VerticalAlignment="Top" Width="47" Margin="169,194,0,0" Click="btnSelDir_Click"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="61,140,0,0" FontSize="14"/>
+                    <!--CheckBox x:Name="chbInnertelList" Content="내선 실시간 상태 리스트 보기" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,144,0,0" Checked="chbInnertelList_Checked" Unchecked="chbInnertelList_Checked"/-->
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

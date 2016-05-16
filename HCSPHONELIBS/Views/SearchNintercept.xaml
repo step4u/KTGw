@@ -1,0 +1,244 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+        xmlns:dm="clr-namespace:Com.Huen.DataModel"
+        xmlns:lib="clr-namespace:Com.Huen.Libs"
+        xmlns:conv="clr-namespace:Com.Huen.Converter"
+        x:Class="Com.Huen.Views.SearchNintercept"
+        Title="Call Recorder - 통화 내역" Height="600" Width="900" Icon="/HCSPHONELIBS;component/icon.ico" MinWidth="640" MinHeight="480" ResizeMode="CanResizeWithGrip">
+    <Window.Resources>
+        <!--<dm:Companies x:Key="Companies"/>-->
+        <conv:CallforToImage x:Key="ToImage"/>
+        <conv:IndexConverter4Paging x:Key="IndexConverter"/>
+        <conv:SelAllChangeBold x:Key="selallchbold"/>
+        <!--conv:Tel2CustInfo x:Key="Tel2CustInfo"/-->
+        <dm:SetSearchTime x:Key="setStime"/>
+    </Window.Resources>
+    <Grid>
+        <Menu x:Name="topMenu" Height="20" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem x:Name="topMenuFile" Header="파일(_F)">
+                <MenuItem x:Name="topMenuItemExit" Header="종료(_X)" Click="topMenuItemExit_Click"/>
+            </MenuItem>
+            <!--MenuItem x:Name="topMenuView" Header="보기(_V)">
+                <MenuItem x:Name="topMenuItemListen" Header="내선상태(_R)" IsCheckable="True" Checked="topMenuItemListen_Checked" Unchecked="topMenuItemListen_Checked"/>
+            </MenuItem-->
+            <MenuItem x:Name="topMenuTool" Header="도구(_T)">
+                <MenuItem x:Name="topMenuItemProps" Header="환경설정(_P)" Click="topMenuItemProps_Click"/>
+            </MenuItem>
+        </Menu>
+        <Separator Margin="0,20,0,0" Height="1" VerticalAlignment="Top"/>
+        <Grid x:Name="grid0" Background="#FFF" Margin="0,21,0,4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="230" MinWidth="100"/>
+                <ColumnDefinition MinWidth="250"/>
+            </Grid.ColumnDefinitions>
+            <Grid Height="38" VerticalAlignment="Top" Grid.Column="1" Margin="0,0,205,0" HorizontalAlignment="Right" Width="497"/>
+            <ListView x:Name="lvInnertels" Margin="0,40,0,46" ItemsSource="{Binding}" Grid.Column="0" SelectionChanged="lvInnertels_SelectionChanged">
+                <!--
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem x:Name="lvInnertels_realtimelisten" Header="청취(_C)" Click="lvInnertels_realtimelisten_Click"/>
+                        <MenuItem x:Name="lvInnertels_realtimelistenCancel" Header="청취중지(_S)" Click="lvInnertels_realtimelistenCancel_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                -->
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header=" 내선번호 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Telnum}" FontWeight="{Binding Path=Telnum, Converter={StaticResource selallchbold}}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header=" 담당자 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=TellerName}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header=" 상태 " Width="100">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=PeerNum}"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <GridSplitter x:Name="gridSplit0" Width="5" Grid.Column="1" HorizontalAlignment="Left" Margin="0,40,0,46"/>
+            <ListView x:Name="lvInterview" Margin="5,40,0,46" ItemsSource="{Binding}" Grid.Column="1" ContextMenuOpening="lvInterview_ContextMenuOpening" SelectionMode="Single">
+                <ListView.ContextMenu>
+                    <ContextMenu>
+                        <!--MenuItem Header="청취(_C)"/-->
+                        <MenuItem x:Name="menu_download" Header="다운로드(_D)" Click="menu_download_Click"/>
+                    </ContextMenu>
+                </ListView.ContextMenu>
+                <ListView.View>
+                    <GridView>
+                        <lib:FixedWidthColumn FixedWidth="30">
+                            <GridViewColumnHeader>
+                                <Grid>
+                                    <CheckBox x:Name="chkheader" Content="" Margin="3, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                                </Grid>
+                            </GridViewColumnHeader>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <CheckBox Content="" Margin="1, 0, 0, 0" IsChecked="{Binding Path=CHK, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </lib:FixedWidthColumn>
+
+                        <!--<GridViewColumn Header=" 번호 " DisplayMemberBinding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}, Converter={StaticResource IndexConverter}}">-->
+                        <GridViewColumn Header=" 번호 " Width="40">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <TextBlock TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Width="40">
+                                            <TextBlock.Text>
+                                                <MultiBinding Converter="{StaticResource IndexConverter}">
+                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListViewItem}}"/>
+                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}"/>
+                                                </MultiBinding>
+                                            </TextBlock.Text>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <!--GridViewColumn Header=" IO ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="25">
+                                        <Image Source="{Binding forward, Converter={StaticResource ToImage}}" Width="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn-->
+
+                        <GridViewColumn Header=" 통화일자 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="25">
+                                        <TextBlock Text="{Binding regyymmdd}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header=" 통화시각 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="25">
+                                        <TextBlock Text="{Binding reghhmmss}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header=" 전화번호 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="25">
+                                        <TextBlock Text="{Binding peernum}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+
+                        <GridViewColumn Header=" 녹취파일 ">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Height="25">
+                                        <TextBlock Text="{Binding recfile}" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <Grid Margin="10,0,0,23" HorizontalAlignment="Left" Width="82" Height="18" VerticalAlignment="Bottom" Grid.Column="0">
+                <Button x:Name="btnPrev0" HorizontalAlignment="Left" Style="{DynamicResource btnArrow}" Width="10" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Bottom" Click="btnPrev0_Click">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Button x:Name="btnNext0" HorizontalAlignment="Left" Style="{DynamicResource btnArrow}" Margin="17,0,0,0" Width="10" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Bottom" Click="btnNext0_Click">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-360"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <TextBlock x:Name="txtF0" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="0" Margin="32,0,0,1" Height="16" VerticalAlignment="Bottom" Width="20" TextAlignment="Right"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" Text="/" Margin="52,0,0,1" Height="16" VerticalAlignment="Bottom" Width="10" TextAlignment="Center"/>
+                <TextBlock x:Name="txtT0" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="0" Margin="62,0,0,1" Height="16" VerticalAlignment="Bottom" Width="20" RenderTransformOrigin="5.6,0.625"/>
+            </Grid>
+            <Grid Margin="10,0,0,23" Height="18" VerticalAlignment="Bottom" Grid.Column="1">
+                <Button x:Name="btnPrev1" HorizontalAlignment="Left" Style="{DynamicResource btnArrow}" Width="10" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Bottom" Click="btnPrev1_Click">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <Button x:Name="btnNext1" HorizontalAlignment="Left" Style="{DynamicResource btnArrow}" Margin="17,0,0,0" Width="10" RenderTransformOrigin="0.5,0.5" Height="18" VerticalAlignment="Bottom" Click="btnNext1_Click">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-360"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+                <TextBlock x:Name="txtF1" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="0" Margin="32,0,0,1" Height="16" VerticalAlignment="Bottom" Width="20" TextAlignment="Right"/>
+                <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" Text="/" Margin="52,0,0,1" Height="16" VerticalAlignment="Bottom" Width="10" TextAlignment="Center"/>
+                <TextBlock x:Name="txtT1" HorizontalAlignment="Left" TextWrapping="NoWrap" Text="0" Margin="62,0,0,1" Height="16" VerticalAlignment="Bottom" Width="20" RenderTransformOrigin="5.6,0.625"/>
+                <Button Content="엑셀저장" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75" Margin="0,-1,10,-1" Click="Button_Click"/>
+            </Grid>
+        </Grid>
+        <Grid Margin="10,29,0,0" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="185" Background="White">
+            <Button x:Name="btnRefresh0" HorizontalAlignment="Left" Style="{DynamicResource btnRefresh1}" VerticalAlignment="Top" Width="16" Height="19" Margin="0,2,0,0" Click="btnRefresh0_Click"/>
+            <!--TextBox x:Name="txtSearch0" HorizontalAlignment="Left" Height="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Margin="25,0,0,0"/-->
+            <xctk:WatermarkTextBox x:Name="txtSearch0" Watermark="내선 / 담당자" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" Margin="25,0,0,0" Height="24"/>
+            <Button x:Name="btnSearch0" Content="검색" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Margin="130,0,0,0" Height="24" Click="btnSearch0_Click"/>
+        </Grid>
+        <Grid Margin="236,29,0,0" Height="24" VerticalAlignment="Top">
+            <Button x:Name="btnRefresh1" HorizontalAlignment="Left" Style="{DynamicResource btnRefresh1}" VerticalAlignment="Top" Width="16" Height="19" Margin="0,2,0,0" Click="btnRefresh1_Click"/>
+            <Custom:DatePicker x:Name="txtFromYY" VerticalAlignment="Top" Margin="24,0,0,0" SelectedDate="{Binding Source={StaticResource setStime}, Path=SDATE}" HorizontalAlignment="Left" Width="100"/>
+            <xctk:TimePicker x:Name="txtFromTT" HorizontalAlignment="Left" Margin="129,0,0,0" VerticalAlignment="Top" Width="100" Height="24" Value="{Binding Source={StaticResource setStime}, Path=SDATE}"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="NoWrap" Text="-" Width="15" TextAlignment="Center" Margin="229,2,0,-2" Height="24" VerticalAlignment="Top"/>
+            <Custom:DatePicker x:Name="txtToYY" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="244,0,0,0" SelectedDate="{x:Static sys:DateTime.Now}" Width="100"/>
+            <xctk:TimePicker x:Name="txtToTT" HorizontalAlignment="Left" Margin="349,0,0,0" VerticalAlignment="Top" Width="100" Height="24" Value="{Binding Source={StaticResource setStime}, Path=EDATE}"/>
+            <xctk:WatermarkTextBox x:Name="txt_peernum" Watermark="고객전화번호" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Margin="454,0,0,0" Height="24" Width="100"/>
+            <Button x:Name="btnSearch1" Content="검색" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="24" Click="btnSearch1_Click" Margin="559,0,0,0"/>
+        </Grid>
+        <Separator Margin="0,0,0,20" Height="1" VerticalAlignment="Bottom"/>
+        <StatusBar Height="20" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="txtStatus" TextWrapping="NoWrap"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>

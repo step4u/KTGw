@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DBCONSTR_MDB" xml:space="preserve">
+    <value>Provider=Microsoft.Jet.OLEDB.4.0;Data Source='huensphoneDB.mdb'</value>
+  </data>
+  <data name="DBCONSTR_MSSQL" xml:space="preserve">
+    <value>Data Source=203.236.241.185; Initial Catalog=CIDSYSDB; Persist Security Info=True; User ID=huen; Password=huen</value>
+  </data>
+  <data name="DBCONSTR_MYSQL" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DEFAULT_PBX_IPADDRESS" xml:space="preserve">
+    <value>112.169.24.102</value>
+  </data>
+  <data name="DEFAULT_PBX_PORT" xml:space="preserve">
+    <value>31001</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="IDB_BANNER_001" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\IDB_BANNER_001.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="incomming" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\incomming.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MDB_FILENAME" xml:space="preserve">
+    <value>huensphoneDB.mdb</value>
+  </data>
+  <data name="MSG_ERR_REG" xml:space="preserve">
+    <value>서버 등록에 실패 하였습니다.\n\r계속하여 같은 문제가 발생할 시에는 관리자에게 문의하여 주시기 바랍니다.</value>
+  </data>
+  <data name="MSG_INCOMMING" xml:space="preserve">
+    <value>님으로 부터 전화가 왔습니다.</value>
+  </data>
+  <data name="MSG_SUCCESS_REG" xml:space="preserve">
+    <value>[등록완료] 대기 상태 입니다.</value>
+  </data>
+  <data name="MSG_SUCCESS_UNREG" xml:space="preserve">
+    <value>등록 해제 완료!</value>
+  </data>
+  <data name="outgoing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\outgoing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="REG_SUBKEY32_MAIN" xml:space="preserve">
+    <value>SOFTWARE\\Coretree\\Coretree IPCC Server</value>
+  </data>
+  <data name="REG_SUBKEY64_MAIN" xml:space="preserve">
+    <value>SOFTWARE\\Wow6432Node\\Coretree\\Huen IPCC Server</value>
+  </data>
+  <data name="TEXT_MAIN_TITLE" xml:space="preserve">
+    <value>Brain Consulting IPCC - Coretree Communication</value>
+  </data>
+  <data name="TEXT_MAINPROPS_TITLE" xml:space="preserve">
+    <value>환경설정</value>
+  </data>
+  <data name="BTN_CANCEL_TEXT" xml:space="preserve">
+    <value>취소</value>
+  </data>
+  <data name="BTN_CLOSE_TEXT" xml:space="preserve">
+    <value>닫기</value>
+  </data>
+  <data name="BTN_SUBMIT_TEXT" xml:space="preserve">
+    <value>확인</value>
+  </data>
+  <data name="LABEL_MAINPROPS_PBXIP" xml:space="preserve">
+    <value>PBX IP :</value>
+  </data>
+  <data name="LABEL_MAINPROPS_PBXPORT" xml:space="preserve">
+    <value>PBX Port :</value>
+  </data>
+  <data name="LABEL_MAINPROPS_USERID" xml:space="preserve">
+    <value>USER ID :</value>
+  </data>
+  <data name="REG_SUBKEY32_SUB" xml:space="preserve">
+    <value>SOFTWARE\\Coretree\\Coretree IPCC Client</value>
+  </data>
+  <data name="REG_SUBKEY64_SUB" xml:space="preserve">
+    <value>SOFTWARE\\Wow6432Node\\Coretree\\Huen IPCC Client</value>
+  </data>
+  <data name="TOOLTIP_MAIN_REG" xml:space="preserve">
+    <value>서버재등록</value>
+  </data>
+  <data name="TOOLTIP_MAIN_REREG" xml:space="preserve">
+    <value>서버등록</value>
+  </data>
+  <data name="REG_MAIN_RUN" xml:space="preserve">
+    <value>SOFTWARE\\Microsoft\\Windows\\CurrentVersion\Run</value>
+  </data>
+  <data name="ic_incomming" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_incomming.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_outgoing" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_outgoing.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_pause.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_play.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_statis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_statis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LABEL_MAINPROPS_AUTOSTART" xml:space="preserve">
+    <value>윈도우 시작시 자동시작</value>
+  </data>
+  <data name="ic_completed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_completed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_props" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_props.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_refresh.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="REG_SUBKEY32_STA" xml:space="preserve">
+    <value>SOFTWARE\\Coretree\\Coretree IPCC\Desk Standard</value>
+  </data>
+  <data name="ERR_USERID_EMPTY" xml:space="preserve">
+    <value>아이디를 입력해 주세요.</value>
+  </data>
+  <data name="ERR_USERPWD_EMPTY" xml:space="preserve">
+    <value>비밀번호를 입력해 주세요.</value>
+  </data>
+  <data name="DBCONSTR_FBSQL" xml:space="preserve">
+    <value>User=USER1; Password=omega936; Database='C:\FBDB\KTGW.FDB'; DataSource={0}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0</value>
+  </data>
+  <data name="TEXT_TREE_DEPART_ROOT" xml:space="preserve">
+    <value>부서명</value>
+  </data>
+  <data name="TEXT_TREE_GROUP_ROOT" xml:space="preserve">
+    <value>반이름</value>
+  </data>
+  <data name="ic_plus0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_plus0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_plus1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\btn_plus1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_plus2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_plus1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MSG_TXT_REGCUSTOMER" xml:space="preserve">
+    <value>등록 된 고객 입니다.</value>
+  </data>
+  <data name="MSG_TXT_UNREGCUSTOMER" xml:space="preserve">
+    <value>등록 되지 않은 고객 입니다.</value>
+  </data>
+  <data name="TEXT_CB_FIRSTFIELD" xml:space="preserve">
+    <value>::선택::</value>
+  </data>
+  <data name="MSG_TXT_CB_CUST_GROUP_SEL" xml:space="preserve">
+    <value>그룹을 선택 하세요.</value>
+  </data>
+  <data name="MSG_TXT_CB_FR_SEL" xml:space="preserve">
+    <value>가족 관계를 선택하세요.</value>
+  </data>
+  <data name="MSG_TXT_FT_TEL" xml:space="preserve">
+    <value>가족 전화번호를 입력하세요.</value>
+  </data>
+  <data name="MSG_TXT_POPUP_00" xml:space="preserve">
+    <value>그룹을 선택하세요.</value>
+  </data>
+  <data name="MSG_TXT_POPUP_01" xml:space="preserve">
+    <value>구분할 수 있는 가족명을 입력 하세요. \n\rex) 시윤이네</value>
+  </data>
+  <data name="MSG_TXT_POPUP_02" xml:space="preserve">
+    <value>주소를 입력하세요.</value>
+  </data>
+  <data name="MSG_TXT_POPUP_DELFAMILY" xml:space="preserve">
+    <value>가족 정보와 해당 통화 내역이 모두 삭제 됩니다.\n\r계속 진행 하시겠습니까?\n\r통화 내역을 남겨 놓으시려면 '현재상태'를 '졸업/사용하지않음'으로 선택 후 수정하세요.</value>
+  </data>
+  <data name="MSG_TXT_POPUP_DELFAMILY_TITLE" xml:space="preserve">
+    <value>가족정보 삭제</value>
+  </data>
+  <data name="MSG_TXT_POPUP_MODIMEMO1" xml:space="preserve">
+    <value>메모가 수정 되었습니다.</value>
+  </data>
+  <data name="MSG_TXT_POPUP_MODIMEMO2" xml:space="preserve">
+    <value>개별통화 메모가 수정 되었습니다.</value>
+  </data>
+  <data name="ic_sms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_example.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smartphone1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smartphone1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smartphone2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smartphone2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smartphone3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\smartphone3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eraser0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eraser0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="eraser1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eraser1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\close.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\info.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_props2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\preferences.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_attention" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\precaut.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_birthday" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bday.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_fees" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\set.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_smses" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_att" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_att.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_cake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_cake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_options1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_options.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_smses1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_smses.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ic_won" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ic_won.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_attention" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_attention.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_cake" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_cake.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_currency" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_currency.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_gear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_gear.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_sms" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_sms.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ico_warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ico_warning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="REG_SUBKEY_CALLRECORDER" xml:space="preserve">
+    <value>SOFTWARE\\Coretree\\Call Recorder</value>
+  </data>
+  <data name="REG_SUBKEY_CRINTERCEPTOR" xml:space="preserve">
+    <value>SOFTWARE\\Coretree\\Call Interceptor</value>
+  </data>
+  <data name="DBCONSTR_FBSQL2" xml:space="preserve">
+    <value>User=USER1;Password=omega936;Database='C:\FBDB\FBRECORDING.FDB';DataSource={0};Port=3050;Dialect=3;Charset=KSC_5601;Role=;Connection lifetime=15; Pooling=true;Packet Size=8192;ServerType=0</value>
+  </data>
+</root>

@@ -1,0 +1,50 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:UserControls="clr-namespace:Com.Huen.UserControls"
+	xmlns:Custom="http://schemas.microsoft.com/wpf/2008/toolkit"
+	xmlns:System="clr-namespace:System;assembly=mscorlib"
+	xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+	mc:Ignorable="d"
+	x:Class="Com.Huen.UserControls.divEventControl"
+	x:Name="UsrAttentionPop"
+	d:DesignWidth="344" d:DesignHeight="344">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid x:Name="divEvent" Opacity="0.75" Visibility="Visible">
+			<Grid.Effect>
+				<DropShadowEffect Color="#FFACACAC" ShadowDepth="1"/>
+			</Grid.Effect>
+			<Rectangle HorizontalAlignment="Left" Height="344" Stroke="#FFACACAC" VerticalAlignment="Top" Width="344" Fill="White"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Path=EVTITLE, ElementName=UsrAttentionPop, Mode=Default}" VerticalAlignment="Top" Margin="28,9,0,0" FontSize="14" FontWeight="Bold"/>
+			<UserControls:ButtonX HorizontalAlignment="Left" VerticalAlignment="Top" Width="15" Height="15" Margin="317,11,0,0" PreviewMouseLeftButtonUp="ButtonX_PreviewMouseLeftButtonUp"/>
+			<Label Content="제목" HorizontalAlignment="Left" Margin="28,36,0,0" VerticalAlignment="Top"/>
+			<TextBox x:Name="evtTitle" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Margin="101,39,0,0"/>
+			<Label Content="장소" HorizontalAlignment="Left" Margin="28,72,0,0" VerticalAlignment="Top"/>
+			<TextBox x:Name="evtPlace" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Margin="101,75,0,0"/>
+			<Label Content="반복" HorizontalAlignment="Left" Margin="28,108,0,0" VerticalAlignment="Top"/>
+			<CheckBox x:Name="evtRepeat" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="101,114,0,0" IsChecked="False"/>
+			<Label Content="반복일" HorizontalAlignment="Left" Margin="28,140,0,0" VerticalAlignment="Top"/>
+            <Grid x:Name="grid_RepeatDay" Margin="101,146,27,183">
+                <CheckBox x:Name="evtDay1" Content="월" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <CheckBox x:Name="evtDay2" Content="화" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="37,0,0,0"/>
+                <CheckBox x:Name="evtDay3" Content="수" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="73,0,0,0"/>
+                <CheckBox x:Name="evtDay4" Content="목" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="110,0,0,0"/>
+                <CheckBox x:Name="evtDay5" Content="금" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="147,0,0,0"/>
+                <CheckBox x:Name="evtDay6" Content="토" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="184,0,0,0"/>
+            </Grid>
+            <Label Content="시작시각" HorizontalAlignment="Left" Margin="28,173,0,0" VerticalAlignment="Top"/>
+			<Custom:DatePicker x:Name="evtSdate" Focusable="False" HorizontalAlignment="Left" Margin="101,174,0,0" VerticalAlignment="Top" SelectedDate="{x:Static System:DateTime.Now}" Width="105"/>
+			<xctk:DateTimeUpDown x:Name="evtStime" HorizontalAlignment="Left" Margin="211,175,0,0" VerticalAlignment="Top" Format="ShortTime" Height="24" Width="80" Value="{x:Static System:DateTime.Now}"/>
+			<Label Content="종료시각" HorizontalAlignment="Left" Margin="28,209,0,0" VerticalAlignment="Top"/>
+			<Custom:DatePicker x:Name="evtEdate" HorizontalAlignment="Left" Margin="101,210,0,0" VerticalAlignment="Top" SelectedDate="{x:Static System:DateTime.Now}" Width="105"/>
+			<xctk:DateTimeUpDown x:Name="evtEtime" HorizontalAlignment="Left" Margin="211,210,0,0" VerticalAlignment="Top" Format="ShortTime" Height="24" Width="80" Value="{x:Static System:DateTime.Now}"/>
+			<Label Content="내용" HorizontalAlignment="Left" Margin="28,245,0,0" VerticalAlignment="Top"/>
+			<TextBox x:Name="evtMemo" HorizontalAlignment="Left" Height="54" TextWrapping="Wrap" VerticalAlignment="Top" Width="216" Margin="101,248,0,0"/>
+			<Button x:Name="evtBtn0" Content="설정" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="95,313,0,0" Click="evtBtn0_Click"/>
+			<Button x:Name="evtBtn1" Content="취소" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="184,313,0,0" Click="evtBtn1_Click"/>
+		</Grid>
+	</Grid>
+</UserControl>
