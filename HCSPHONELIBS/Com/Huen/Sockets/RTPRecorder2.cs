@@ -353,7 +353,7 @@ namespace Com.Huen.Sockets
                         wavformat = WaveFormat.CreateCustomFormat(WaveFormatEncoding.G729, 8000, 1, 8000, 1, 8);
                         break;
                     default:
-                        wavformat = WaveFormat.CreateMuLawFormat(8000, 1);
+                        wavformat = WaveFormat.CreateALawFormat(8000, 1);
                         break;
                 }
 
