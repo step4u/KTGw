@@ -15,6 +15,7 @@ using NAudio.Wave;
 
 using System.Diagnostics;
 using FirebirdSql.Data.FirebirdClient;
+using System.Collections;
 
 namespace Com.Huen.Sockets
 {
@@ -328,11 +329,45 @@ namespace Com.Huen.Sockets
                     _sockRTPSrv.SendTo(buffer, 0, buffer.Length, SocketFlags.None, __ic.ClientIPEP);
             }
 #endif
-            this.StackRtp2Instance(recInfo);
+            this.StackRtp2Instance(recInfo, buffer);
         }
 
-        private void StackRtp2Instance(RecordInfo_t recInfo)
+        private void GetInfoFromRTP(RecordInfo_t recInfo, byte[] buff, ref int codec, ref uint ssrc)
         {
+            byte[] rtp = new byte[recInfo.size];
+            byte[] rtpHeader = new byte[12];
+            Array.Copy(recInfo.voice, 0, rtpHeader, 0, rtpHeader.Length);
+            BitArray baHeader = new BitArray(rtpHeader);
+            BitArray baCodec = new BitArray(7);
+
+            for (int i = 0; i < baCodec.Length; i++)
+            {
+                baCodec[i] = baHeader[i + 9];
+            }
+
+            codec = getIntFromBitArray(baCodec);
+            
+            byte[] btSsrc = new byte[4];
+
+            //Array.Copy(rtpHeader);
+         }
+
+        private int getIntFromBitArray(BitArray bitArray)
+        {
+            int[] array = new int[1];
+            bitArray.CopyTo(array, 0);
+            //Array.Reverse(array);
+            return array[0];
+        }
+
+        private void StackRtp2Instance(RecordInfo_t recInfo, byte[] buffer)
+        {
+            int _codec = -1;
+            uint _ssrc = 0;
+            GetInfoFromRTP(recInfo, buffer, ref _codec, ref _ssrc);
+
+            //uint ssrc = this.GetInfoFromRTP(recInfo.voice);
+
             var ingInstance = RecordIngList.FirstOrDefault(x => x.ext == recInfo.extension && x.peer == recInfo.peer_number);
             if (ingInstance == null)
             {

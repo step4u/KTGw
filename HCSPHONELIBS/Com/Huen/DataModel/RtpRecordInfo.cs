@@ -29,7 +29,8 @@ namespace Com.Huen.DataModel
         private List<ReceivedRtp> listIn;
         private List<ReceivedRtp> listOut;
         private WaveFileWriter writer = null;
-        private WaveFormat pcmFormat = new WaveFormat(8000, 16, 1);
+        private WaveFormat pcmFormat16 = new WaveFormat(8000, 16, 1);
+        private WaveFormat pcmFormat8 = new WaveFormat(8000, 8, 1);
 
         //public RtpRecordInfo() : this (WaveFormat.CreateMuLawFormat(8000, 1), "", "")
         //{
@@ -46,20 +47,20 @@ namespace Com.Huen.DataModel
             listIn = new List<ReceivedRtp>();
             listOut = new List<ReceivedRtp>();
 
-            writer = new WaveFileWriter(string.Format(@"{0}\{1}", savepath, filename), pcmFormat);
+            writer = new WaveFileWriter(string.Format(@"{0}\{1}", savepath, filename), pcmFormat8);
             this.InitTimer();
         }
 
         private void InitTimer()
         {
             timer = new Timer();
-            timer.Interval = 3000;
+            timer.Interval = 2500;
             timer.Enabled = true;
             timer.Elapsed += timer_Elapsed;
             timer.Start();
 
             endtimer = new Timer();
-            endtimer.Interval = 30000;
+            endtimer.Interval = 7000;
             endtimer.Enabled = true;
             endtimer.Elapsed += endtimer_Elapsed;
             endtimer.Start();
@@ -67,6 +68,12 @@ namespace Com.Huen.DataModel
 
         void endtimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            if (timer != null)
+            {
+                timer.Enabled = false;
+                timer.Close();
+            }
+
             this.MixRtp("final");
 
             if (EndOfRtpStreamEven != null)
@@ -238,22 +245,18 @@ namespace Com.Huen.DataModel
 
             if (_delayedms == DelayedMil.i80o160)
             {
-                // item > out
-                //List<ReceivedRtp> linein = new List<ReceivedRtp>();
-                //linein = listIn.ToList();
-
-                int seq = item.seq * 2;
-                ReceivedRtp _item0 = linin.FirstOrDefault(x => x.seq == seq);
-                ReceivedRtp _item1 = linin.FirstOrDefault(x => x.seq == seq + 1);
+                int nseq = item.seq - 1 + item.seq;
+                ReceivedRtp _item0 = linin.FirstOrDefault(x => x.seq == nseq);
+                ReceivedRtp _item1 = linin.FirstOrDefault(x => x.seq == nseq + 1);
 
                 if (_item0 == null)
                 {
-                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = seq, size = 92, ext = item.ext, peer = item.peer };
+                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = nseq, size = 92, ext = item.ext, peer = item.peer };
                 }
 
                 if (_item1 == null)
                 {
-                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = seq + 1, size = 92, ext = item.ext, peer = item.peer };
+                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 1, size = 92, ext = item.ext, peer = item.peer };
                 }
 
                 // item2 + tmpitem mix with item1 and write
@@ -276,21 +279,18 @@ namespace Com.Huen.DataModel
             }
             else if (_delayedms == DelayedMil.i160o80)
             {
-                // item > in
-                //List<ReceivedRtp> lineout = new List<ReceivedRtp>();
-                //lineout = listOut.ToList();
-                int seq = item.seq * 2;
-                ReceivedRtp _item0 = linout.FirstOrDefault(x => x.seq == seq);
-                ReceivedRtp _item1 = linout.FirstOrDefault(x => x.seq == seq + 1);
+                int nseq = item.seq - 1 + item.seq;
+                ReceivedRtp _item0 = linout.FirstOrDefault(x => x.seq == nseq);
+                ReceivedRtp _item1 = linout.FirstOrDefault(x => x.seq == nseq + 1);
 
                 if (_item0 == null)
                 {
-                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = seq, size = 92, ext = item.ext, peer = item.peer };
+                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = nseq, size = 92, ext = item.ext, peer = item.peer };
                 }
 
                 if (_item1 == null)
                 {
-                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = seq + 1, size = 92, ext = item.ext, peer = item.peer };
+                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 1, size = 92, ext = item.ext, peer = item.peer };
                 }
 
                 // item2 + tmpitem mix with item1 and write
@@ -313,11 +313,6 @@ namespace Com.Huen.DataModel
             }
             else
             {
-                // item > in
-                // same
-                // item1 mix with item2 and write
-                //List<ReceivedRtp> lineout = new List<ReceivedRtp>();
-                //lineout = listOut.ToList();
                 ReceivedRtp _item = linout.FirstOrDefault(x => x.seq == item.seq);
                 if (_item == null)
                 {
@@ -341,9 +336,6 @@ namespace Com.Huen.DataModel
 
         private void RealMix(ReceivedRtp item1, ReceivedRtp item2, ref byte[] buff)
         {
-            //buff = null;
-            //byte[] writingBuffer = new byte[(item2.size - headersize) * 2];
-
             if (item1 == null || item2 == null) return;
 
             if (item1.size == 0 || item2.size == 0) return;
@@ -353,26 +345,24 @@ namespace Com.Huen.DataModel
 
             Array.Copy(item1.buff, headersize, wavSrc1, 0, (item1.size - headersize));
             Array.Copy(item2.buff, headersize, wavSrc2, 0, (item2.size - headersize));
-            //Buffer.BlockCopy(__rcvdataIn.buffers, 12, wavSrcIn, 0, wavSrcIn.Length);
-            //Buffer.BlockCopy(__rcvdataOut.buffers, 12, wavSrcOut, 0, wavSrcOut.Length);
 
             WaveMixerStream32 mixer = new WaveMixerStream32();
-            //mixer.AutoStop = true;
+            // mixer.AutoStop = true;
             MemoryStream memstrem = new MemoryStream(wavSrc1);
             RawSourceWaveStream rawsrcstream = new RawSourceWaveStream(memstrem, this.codec);
-            WaveFormatConversionStream conversionstream = new WaveFormatConversionStream(pcmFormat, rawsrcstream);
+            WaveFormatConversionStream conversionstream = new WaveFormatConversionStream(pcmFormat16, rawsrcstream);
             WaveChannel32 channelstream = new WaveChannel32(conversionstream);
             mixer.AddInputStream(channelstream);
 
             memstrem = new MemoryStream(wavSrc2);
             rawsrcstream = new RawSourceWaveStream(memstrem, this.codec);
-            conversionstream = new WaveFormatConversionStream(pcmFormat, rawsrcstream);
+            conversionstream = new WaveFormatConversionStream(pcmFormat16, rawsrcstream);
             channelstream = new WaveChannel32(conversionstream);
             mixer.AddInputStream(channelstream);
             mixer.Position = 0;
 
             Wave32To16Stream to16 = new Wave32To16Stream(mixer);
-            var convStm = new WaveFormatConversionStream(pcmFormat, to16);
+            var convStm = new WaveFormatConversionStream(pcmFormat8, to16);
             byte[] mixedbytes = new byte[(int)convStm.Length];
             int chk = convStm.Read(mixedbytes, 0, (int)convStm.Length);
             //Buffer.BlockCopy(tobyte, 0, writingBuffer, 0, tobyte.Length);
@@ -391,18 +381,18 @@ namespace Com.Huen.DataModel
             //return mixedbytes;
         }
 
-        private byte[] StereoToMono(byte[] input)
-        {
-            byte[] output = new byte[input.Length / 2];
-            int outputIndex = 0;
-            for (int n = 0; n < input.Length; n += 4)
-            {
-                // copy in the first 16 bit sample
-                output[outputIndex++] = input[n];
-                output[outputIndex++] = input[n + 1];
-            }
-            return output;
-        }
+        //private byte[] StereoToMono(byte[] input)
+        //{
+        //    byte[] output = new byte[input.Length / 2];
+        //    int outputIndex = 0;
+        //    for (int n = 0; n < input.Length; n += 4)
+        //    {
+        //        // copy in the first 16 bit sample
+        //        output[outputIndex++] = input[n];
+        //        output[outputIndex++] = input[n + 1];
+        //    }
+        //    return output;
+        //}
 
         private void WaveFileWriting(byte[] buff)
         {
@@ -410,9 +400,9 @@ namespace Com.Huen.DataModel
 
             if (buff.Length == 0) return;
 
-            using (MemoryStream memStm = new MemoryStream(buff))
-            using (RawSourceWaveStream rawSrcStm = new RawSourceWaveStream(memStm, pcmFormat))
-            {
+            //using (MemoryStream memStm = new MemoryStream(buff))
+            //using (RawSourceWaveStream rawSrcStm = new RawSourceWaveStream(memStm, pcmFormat))
+            //{
                 //if (this.writer == null)
                 //{
                 //    this.writer = new WaveFileWriter(GetFullFN, pcmFormat);
@@ -420,7 +410,7 @@ namespace Com.Huen.DataModel
 
                 this.writer.Write(buff, 0, buff.Length);
                 this.writer.Flush();
-            }
+            //}
         }
 
         public void Dispose()
@@ -428,7 +418,8 @@ namespace Com.Huen.DataModel
             if (this.writer != null)
             {
                 writer.Close();
-                writer = null;
+                //writer = null;
+                //writer.Dispose();
             }
 
             if (listIn != null)
