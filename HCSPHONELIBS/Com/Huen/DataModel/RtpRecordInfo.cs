@@ -245,7 +245,7 @@ namespace Com.Huen.DataModel
 
             if (_delayedms == DelayedMil.i80o160)
             {
-                int nseq = item.seq - 1 + item.seq;
+                int nseq = item.seq * 2;
                 ReceivedRtp _item0 = linin.FirstOrDefault(x => x.seq == nseq);
                 ReceivedRtp _item1 = linin.FirstOrDefault(x => x.seq == nseq + 1);
 
@@ -279,7 +279,7 @@ namespace Com.Huen.DataModel
             }
             else if (_delayedms == DelayedMil.i160o80)
             {
-                int nseq = item.seq - 1 + item.seq;
+                int nseq = item.seq * 2;
                 ReceivedRtp _item0 = linout.FirstOrDefault(x => x.seq == nseq);
                 ReceivedRtp _item1 = linout.FirstOrDefault(x => x.seq == nseq + 1);
 
@@ -311,7 +311,7 @@ namespace Com.Huen.DataModel
                     listOut.RemoveAll(x => x.seq == _item1.seq);
                 }
             }
-            else
+            else if (_delayedms == DelayedMil.same)
             {
                 ReceivedRtp _item = linout.FirstOrDefault(x => x.seq == item.seq);
                 if (_item == null)
@@ -328,6 +328,90 @@ namespace Com.Huen.DataModel
                 lock (listOut)
                 {
                     listOut.RemoveAll(x => x.seq == _item.seq);
+                }
+            }
+            else if (_delayedms == DelayedMil.i80o240)
+            {
+                int nseq = item.seq * 3;
+                ReceivedRtp _item0 = linin.FirstOrDefault(x => x.seq == nseq);
+                ReceivedRtp _item1 = linin.FirstOrDefault(x => x.seq == nseq + 1);
+                ReceivedRtp _item2 = linin.FirstOrDefault(x => x.seq == nseq + 2);
+
+                if (_item0 == null)
+                {
+                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = nseq, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                if (_item1 == null)
+                {
+                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 1, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                if (_item2 == null)
+                {
+                    _item2 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 2, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                // item2 + tmpitem mix with item1 and write
+                byte[] tmpbuff = new byte[332];
+                Array.Copy(_item0.buff, 0, tmpbuff, 0, _item0.size);
+                Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, _item1.size - headersize);
+                Array.Copy(_item2.buff, headersize, tmpbuff, _item0.size + _item0.size - headersize, _item2.size - headersize);
+                ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = _item0.size + _item1.size + _item2.size - headersize };
+                this.RealMix(_itm, item, ref mixedbytes);
+
+                lock (listIn)
+                {
+                    listIn.RemoveAll(x => x.seq == _item0.seq);
+                    listIn.RemoveAll(x => x.seq == _item1.seq);
+                    listIn.RemoveAll(x => x.seq == _item2.seq);
+                }
+
+                lock (listOut)
+                {
+                    listOut.RemoveAll(x => x.seq == item.seq);
+                }
+            }
+            else if (_delayedms == DelayedMil. i240o80)
+            {
+                int nseq = item.seq * 3;
+                ReceivedRtp _item0 = linout.FirstOrDefault(x => x.seq == nseq);
+                ReceivedRtp _item1 = linout.FirstOrDefault(x => x.seq == nseq + 1);
+                ReceivedRtp _item2 = linout.FirstOrDefault(x => x.seq == nseq + 2);
+
+                if (_item0 == null)
+                {
+                    _item0 = new ReceivedRtp() { buff = new byte[332], seq = nseq, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                if (_item1 == null)
+                {
+                    _item1 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 1, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                if (_item2 == null)
+                {
+                    _item2 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 2, size = 92, ext = item.ext, peer = item.peer };
+                }
+
+                // item2 + tmpitem mix with item1 and write
+                byte[] tmpbuff = new byte[332];
+                Array.Copy(_item0.buff, 0, tmpbuff, 0, _item0.size);
+                Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, _item1.size - headersize);
+                Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size + _item1.size - headersize, _item2.size - headersize);
+                ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = _item0.size + _item1.size + _item2.size - headersize };
+                this.RealMix(_itm, item, ref mixedbytes);
+
+                lock (listIn)
+                {
+                    listIn.RemoveAll(x => x.seq == item.seq);
+                }
+
+                lock (listOut)
+                {
+                    listOut.RemoveAll(x => x.seq == _item0.seq);
+                    listOut.RemoveAll(x => x.seq == _item1.seq);
+                    listOut.RemoveAll(x => x.seq == _item2.seq);
                 }
             }
 
@@ -437,7 +521,9 @@ namespace Com.Huen.DataModel
         {
             i80o160 = 0,
             i160o80 = 1,
-            same = 2
+            i80o240 = 3,
+            i240o80 = 4,
+            same = 5
         }
     }
 }
