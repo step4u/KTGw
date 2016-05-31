@@ -405,7 +405,7 @@ namespace Com.Huen.Sockets
 
                 RtpRecordInfo RecInstance = new RtpRecordInfo(wavformat, path, fileName) { ext = recInfo.extension, peer = recInfo.peer_number, codec = wavformat, idx = ts.TotalMilliseconds, savepath = path, filename = fileName };
 
-                RecInstance.EndOfRtpStreamEven += RecInstance_EndOfRtpStreamEvent;
+                RecInstance.EndOfRtpStreamEvent += RecInstance_EndOfRtpStreamEvent;
 
                 RecInstance.Add(recInfo);
                 lock (RecordIngList)
