@@ -14,7 +14,7 @@ namespace RecTestWin
     public partial class MainWindow : Window
     {
         //private RTPRecorder _recorder = null;
-        private RTPRecorder2 _recorder = null;
+        private RTPRecorder3 _recorder = null;
         private FileTransferServer _filesrv = null;
         //private FileTransferServer2 _filesrv = null;
         private ModifyRegistry _reg;
@@ -33,7 +33,7 @@ namespace RecTestWin
 
             try
             {
-                _recorder = new RTPRecorder2();
+                _recorder = new RTPRecorder3();
                 //_recorder.StartCmdSrv();
                 //_recorder.StartRtpRedirectSrv();
 
