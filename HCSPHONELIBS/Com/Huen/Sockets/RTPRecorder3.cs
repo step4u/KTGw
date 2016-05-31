@@ -29,7 +29,7 @@ namespace Com.Huen.Sockets
 
         private WaveFormat pcmFormat = new WaveFormat(8000, 16, 1);
 
-        private List<RtpRecordInfo> RecordIngList;
+        private List<RTPRecInfo> RecordIngList;
 
         private int threadcount = 1;
         private int port = 21010;
@@ -65,7 +65,7 @@ namespace Com.Huen.Sockets
 
             this.ReadIni();
 
-            RecordIngList = new List<RtpRecordInfo>();
+            RecordIngList = new List<RTPRecInfo>();
 
             remoteep = new IPEndPoint(IPAddress.Any, 0);
             localep = new IPEndPoint(IPAddress.Any, this.port);
@@ -337,27 +337,6 @@ namespace Com.Huen.Sockets
             var ingInstance = RecordIngList.FirstOrDefault(x => x.ext == recInfo.extension && x.peer == recInfo.peer_number);
             if (ingInstance == null)
             {
-                WaveFormat wavformat;
-
-                switch (recInfo.codec)
-                {
-                    case 0:
-                        wavformat = WaveFormat.CreateMuLawFormat(8000, 1);
-                        break;
-                    case 8:
-                        wavformat = WaveFormat.CreateALawFormat(8000, 1);
-                        break;
-                    case 4:
-                        wavformat = WaveFormat.CreateCustomFormat(WaveFormatEncoding.G723, 8000, 1, 8000, 1, 8);
-                        break;
-                    case 18:
-                        wavformat = WaveFormat.CreateCustomFormat(WaveFormatEncoding.G729, 8000, 1, 8000, 1, 8);
-                        break;
-                    default:
-                        wavformat = WaveFormat.CreateALawFormat(8000, 1);
-                        break;
-                }
-
                 DateTime now = DateTime.Now;
                 TimeSpan ts = now - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Local);
 
@@ -367,18 +346,15 @@ namespace Com.Huen.Sockets
 
                 string path = string.Format(@"{0}\{1}", Options.savedir, datepath);
 
-                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                // if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
-                RTPRecInfo RecInstance = new RTPRecInfo();
+                RTPRecInfo RecInstance = new RTPRecInfo(recInfo, path, fileName);
 
                 //RecInstance.EndOfRtpStreamEvent += RecInstance_EndOfRtpStreamEvent;
-                byte[] rtpPayload = new byte[recInfo.size];
-                Array.Copy(recInfo.voice, 0, rtpPayload, 0, recInfo.size);
 
-                RecInstance.Add(rtpPayload);
                 lock (RecordIngList)
                 {
-                    //RecordIngList.Add(RecInstance);
+                    RecordIngList.Add(RecInstance);
                 }
             }
             else
@@ -389,7 +365,7 @@ namespace Com.Huen.Sockets
 
         void RecInstance_EndOfRtpStreamEvent(object sender, EventArgs e)
         {
-            RtpRecordInfo ingdata = (RtpRecordInfo)sender;
+            RTPRecInfo ingdata = (RTPRecInfo)sender;
             if (ingdata != null)
             {
                 string _savepath = ingdata.savepath;
