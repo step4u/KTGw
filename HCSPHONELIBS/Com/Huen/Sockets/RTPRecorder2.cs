@@ -332,52 +332,22 @@ namespace Com.Huen.Sockets
             this.StackRtp2Instance(recInfo, buffer);
         }
 
-        private void GetInfoFromRTP(RecordInfo_t recInfo, byte[] buff, ref int codec, ref uint ssrc)
-        {
-            byte[] rtp = new byte[recInfo.size];
-            byte[] rtpHeader = new byte[12];
-            Array.Copy(recInfo.voice, 0, rtpHeader, 0, rtpHeader.Length);
-            BitArray baHeader = new BitArray(rtpHeader);
-            BitArray baCodec = new BitArray(7);
-
-            for (int i = 0; i < baCodec.Length; i++)
-            {
-                baCodec[i] = baHeader[i + 9];
-            }
-
-            codec = getIntFromBitArray(baCodec);
-            
-            byte[] btSsrc = new byte[4];
-
-            //Array.Copy(rtpHeader);
-         }
-
-        private int getIntFromBitArray(BitArray bitArray)
-        {
-            int[] array = new int[1];
-            bitArray.CopyTo(array, 0);
-            //Array.Reverse(array);
-            return array[0];
-        }
-
         private void StackRtp2Instance(RecordInfo_t recInfo, byte[] buffer)
         {
-            int _codec = -1;
-            uint _ssrc = 0;
-            GetInfoFromRTP(recInfo, buffer, ref _codec, ref _ssrc);
-
-            //uint ssrc = this.GetInfoFromRTP(recInfo.voice);
-
             var ingInstance = RecordIngList.FirstOrDefault(x => x.ext == recInfo.extension && x.peer == recInfo.peer_number);
             if (ingInstance == null)
             {
+                byte[] rtpbuff = new byte[recInfo.size];
+                Array.Copy(recInfo.voice, 0, rtpbuff, 0, recInfo.size);
+                WinSound.RTPPacket rtp = new WinSound.RTPPacket(rtpbuff);
+
                 WaveFormat wavformat;
 
-                switch (recInfo.codec)
+                switch (rtp.PayloadType)
                 {
                     case 0:
-                        // wavformat = WaveFormat.CreateMuLawFormat(8000, 1);
-                        // break;
+                        wavformat = WaveFormat.CreateMuLawFormat(8000, 1);
+                        break;
                     case 8:
                         wavformat = WaveFormat.CreateALawFormat(8000, 1);
                         break;
@@ -407,6 +377,10 @@ namespace Com.Huen.Sockets
 
                 RecInstance.EndOfRtpStreamEvent += RecInstance_EndOfRtpStreamEvent;
 
+                util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // RecInfo Codec : " + recInfo.codec.ToString(), fileName + "_codec");
+                RecInstance.chkcount++;
+                RecInstance.firstIsExtension = recInfo.isExtension;
+
                 RecInstance.Add(recInfo);
                 lock (RecordIngList)
                 {
@@ -415,6 +389,16 @@ namespace Com.Huen.Sockets
             }
             else
             {
+                if (ingInstance.chkcount == 1 && ingInstance.firstIsExtension != recInfo.isExtension)
+                {
+                    byte[] rtpbuff = new byte[recInfo.size];
+                    Array.Copy(recInfo.voice, 0, rtpbuff, 0, recInfo.size);
+                    WinSound.RTPPacket rtp = new WinSound.RTPPacket(rtpbuff);
+
+                    util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // RecInfo Codec : " + recInfo.codec.ToString(), ingInstance.filename + "_codec");
+                    ingInstance.chkcount++;
+                }
+
                 ingInstance.Add(recInfo);
             }
         }
