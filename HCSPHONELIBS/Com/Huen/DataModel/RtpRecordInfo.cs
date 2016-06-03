@@ -89,8 +89,8 @@ namespace Com.Huen.DataModel
         public int firstIsExtension = -1;
         public void Add(RecordInfo_t obj)
         {
-            // string msg = string.Format("seq:{0}, ext:{1}, peer:{2}, isExtension:{3}, size:{4}, bytesLength:{5}, codec:{6}", obj.seq, obj.extension, obj.peer_number, obj.isExtension, obj.size - 12, obj.voice.Length, obj.codec);
-            // util.WriteLogTest3(msg, this.filename);
+            string msg = string.Format("seq:{0}, ext:{1}, peer:{2}, isExtension:{3}, size:{4}, codec:{5}", obj.seq, obj.extension, obj.peer_number, obj.isExtension, obj.size - 12, obj.codec);
+            util.WriteLogTest3(msg, this.filename);
 
             if (obj.size == 0)
                 endcount++;
@@ -186,7 +186,8 @@ namespace Com.Huen.DataModel
                     if (xtimes >= 1)
                     {
                         _count = linout.Count;
-                    } else
+                    }
+                    else
                     {
                         _count = (int)(((float)linout.Count) * xtimes);
                     }
@@ -312,9 +313,9 @@ namespace Com.Huen.DataModel
                 Array.Copy(_item0.buff, 0, tmpbuff, 0, _item0.size);
                 Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, (_item1.size - headersize));
                 ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = (_item0.size + _item1.size - headersize) };
-                this.RealMix(_itm, baseitem, ref mixedbytes);
+                mixedbytes = this.RealMix(_itm, baseitem);
 
-                util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq, this.filename);
+                // util.WriteLogTest3(_delayedms.ToString() + " // codec: " + _item0.codec.ToString() + " // " + (_item0.size - 12) + " // basecodec: " + baseitem.codec + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq, this.filename);
 
                 lock (listIn)
                 {
@@ -348,9 +349,9 @@ namespace Com.Huen.DataModel
                 Array.Copy(_item0.buff, 0, tmpbuff, 0, _item0.size);
                 Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, (_item1.size - headersize));
                 ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = (_item0.size + _item1.size - headersize) };
-                this.RealMix(_itm, baseitem, ref mixedbytes);
+                mixedbytes = this.RealMix(_itm, baseitem);
 
-                util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq, this.filename);
+                // util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq, this.filename);
 
                 lock (listIn)
                 {
@@ -391,9 +392,9 @@ namespace Com.Huen.DataModel
                 Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, _item1.size - headersize);
                 Array.Copy(_item2.buff, headersize, tmpbuff, _item0.size + _item0.size - headersize, _item2.size - headersize);
                 ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = _item0.size + _item1.size + _item2.size - headersize };
-                this.RealMix(_itm, baseitem, ref mixedbytes);
+                mixedbytes = this.RealMix(_itm, baseitem);
 
-                util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq + " // " + _item2.seq, this.filename);
+                // util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq + " // " + _item2.seq, this.filename);
 
                 lock (listIn)
                 {
@@ -429,7 +430,7 @@ namespace Com.Huen.DataModel
                     _item2 = new ReceivedRtp() { buff = new byte[332], seq = nseq + 2, size = 92, ext = baseitem.ext, peer = baseitem.peer };
                 }
 
-                util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq + " // " + _item2.seq, this.filename);
+                // util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item0.seq + " // " + _item1.seq + " // " + _item2.seq, this.filename);
 
                 // item2 + tmpitem mix with item1 and write
                 byte[] tmpbuff = new byte[332];
@@ -437,7 +438,7 @@ namespace Com.Huen.DataModel
                 Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size, _item1.size - headersize);
                 Array.Copy(_item1.buff, headersize, tmpbuff, _item0.size + _item1.size - headersize, _item2.size - headersize);
                 ReceivedRtp _itm = new ReceivedRtp() { buff = tmpbuff, size = _item0.size + _item1.size + _item2.size - headersize };
-                this.RealMix(_itm, baseitem, ref mixedbytes);
+                mixedbytes = this.RealMix(_itm, baseitem);
 
                 lock (listIn)
                 {
@@ -458,9 +459,9 @@ namespace Com.Huen.DataModel
                 {
                     _item = new ReceivedRtp() { buff = new byte[332], seq = baseitem.seq, size = baseitem.size, ext = baseitem.ext, peer = baseitem.peer };
                 }
-                this.RealMix(_item, baseitem, ref mixedbytes);
+                mixedbytes = this.RealMix(_item, baseitem);
 
-                util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item.seq, this.filename);
+                // util.WriteLogTest3(_delayedms.ToString() + " // " + (baseitem.size - 12) + " // " + baseitem.seq + " // " + _item.seq, this.filename);
 
                 lock (listIn)
                 {
@@ -476,11 +477,11 @@ namespace Com.Huen.DataModel
             return mixedbytes;
         }
 
-        private void RealMix(ReceivedRtp item1, ReceivedRtp item2, ref byte[] buff)
+        private byte[] RealMix(ReceivedRtp item1, ReceivedRtp item2)
         {
-            if (item1 == null || item2 == null) return;
+            if (item1 == null || item2 == null) return null;
 
-            if (item1.size == 0 || item2.size == 0) return;
+            if (item1.size == 0 || item2.size == 0) return null;
 
             byte[] wavSrc1 = new byte[item1.size - headersize];
             byte[] wavSrc2 = new byte[item2.size - headersize];
@@ -518,9 +519,7 @@ namespace Com.Huen.DataModel
             to16.Close(); to16.Dispose(); to16 = null;
             mixer.Close(); mixer.Dispose(); mixer = null;
 
-            buff = mixedbytes;
-
-            //return mixedbytes;
+            return mixedbytes;
         }
 
         //private byte[] StereoToMono(byte[] input)

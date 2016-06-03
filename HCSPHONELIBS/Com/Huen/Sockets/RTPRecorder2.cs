@@ -395,7 +395,7 @@ namespace Com.Huen.Sockets
                     Array.Copy(recInfo.voice, 0, rtpbuff, 0, recInfo.size);
                     WinSound.RTPPacket rtp = new WinSound.RTPPacket(rtpbuff);
 
-                    util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // RecInfo Codec : " + recInfo.codec.ToString(), ingInstance.filename + "_codec");
+                    util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // Structure Codec : " + recInfo.codec.ToString(), ingInstance.filename + "_codec");
                     ingInstance.chkcount++;
                 }
 

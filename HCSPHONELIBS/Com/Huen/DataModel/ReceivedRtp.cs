@@ -7,7 +7,7 @@ namespace Com.Huen.DataModel
 {
     public class ReceivedRtp : IDisposable
     {
-        public uint SSRC;
+        public int codec = -1;
         public int isExtension = -1;
         public string ext = string.Empty;
         public string peer = string.Empty;
