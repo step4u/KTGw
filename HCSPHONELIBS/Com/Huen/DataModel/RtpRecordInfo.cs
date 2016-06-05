@@ -74,7 +74,7 @@ namespace Com.Huen.DataModel
                 timer.Close();
             }
 
-            this.MixRtp();
+            this.MixRtp(MixType.FINAL);
 
             if (EndOfRtpStreamEvent != null)
                 EndOfRtpStreamEvent(this, new EventArgs());
@@ -82,7 +82,7 @@ namespace Com.Huen.DataModel
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            this.MixRtp();
+            this.MixRtp(MixType.NORMAL);
         }
 
         public long chkcount = 0;
@@ -111,7 +111,7 @@ namespace Com.Huen.DataModel
 
                 System.Threading.Thread.Sleep(3000);
 
-                this.MixRtp();
+                this.MixRtp(MixType.FINAL);
 
                 if (EndOfRtpStreamEvent != null)
                     EndOfRtpStreamEvent(this, new EventArgs());
@@ -143,7 +143,7 @@ namespace Com.Huen.DataModel
             }
         }
 
-        private void MixRtp()
+        private void MixRtp(MixType mixtype)
         {
             if (timer != null) timer.Enabled = false;
 
@@ -177,6 +177,7 @@ namespace Com.Huen.DataModel
             else
             {
                 byte[] mixedbytes = null;
+                float times = 0.8f;
                 if ((itemIn.size - headersize) == 80 && (itemOut.size - headersize) == 160)
                 {
                     _delayedms = DelayedMil.i80o160;
@@ -185,11 +186,11 @@ namespace Com.Huen.DataModel
                     int _count = 0;
                     if (xtimes >= 1)
                     {
-                        _count = linout.Count;
+                        _count = mixtype == MixType.NORMAL ? (int)(linout.Count * times) : linout.Count;
                     }
                     else
                     {
-                        _count = (int)(((float)linout.Count) * xtimes);
+                        _count = mixtype == MixType.NORMAL ? (int)((((float)linout.Count) * xtimes) * times) : (int)(((float)linout.Count) * xtimes);
                     }
 
                     for (int i = 0; i < _count; i++)
@@ -206,11 +207,11 @@ namespace Com.Huen.DataModel
                     int _count = 0;
                     if (xtimes >= 1)
                     {
-                        _count = linin.Count;
+                        _count = mixtype == MixType.NORMAL ? (int)(linout.Count * times) : linout.Count;
                     }
                     else
                     {
-                        _count = (int)(((float)linin.Count) * xtimes);
+                        _count = mixtype == MixType.NORMAL ? (int)((((float)linout.Count) * xtimes) * times) : (int)(((float)linout.Count) * xtimes);
                     }
 
                     for (int i = 0; i < _count; i++)
@@ -227,11 +228,11 @@ namespace Com.Huen.DataModel
                     int _count = 0;
                     if (xtimes >= 1)
                     {
-                        _count = linout.Count;
+                        _count = mixtype == MixType.NORMAL ? (int)(linout.Count * times) : linout.Count;
                     }
                     else
                     {
-                        _count = (int)(((float)linout.Count) * xtimes);
+                        _count = mixtype == MixType.NORMAL ? (int)((((float)linout.Count) * xtimes) * times) : (int)(((float)linout.Count) * xtimes);
                     }
 
                     for (int i = 0; i < _count; i++)
@@ -248,11 +249,11 @@ namespace Com.Huen.DataModel
                     int _count = 0;
                     if (xtimes >= 1)
                     {
-                        _count = linin.Count;
+                        _count = mixtype == MixType.NORMAL ? (int)(linout.Count * times) : linout.Count;
                     }
                     else
                     {
-                        _count = (int)(((float)linin.Count) * xtimes);
+                        _count = mixtype == MixType.NORMAL ? (int)((((float)linout.Count) * xtimes) * times) : (int)(((float)linout.Count) * xtimes);
                     }
 
                     for (int i = 0; i < _count; i++)
@@ -269,11 +270,11 @@ namespace Com.Huen.DataModel
                     int _count = 0;
                     if (xtimes >= 1)
                     {
-                        _count = linout.Count;
+                        _count = mixtype == MixType.NORMAL ? (int)(linout.Count * times) : linout.Count;
                     }
                     else
                     {
-                        _count = (int)(((float)linout.Count) * xtimes);
+                        _count = mixtype == MixType.NORMAL ? (int)((((float)linout.Count) * xtimes) * times) : (int)(((float)linout.Count) * xtimes);
                     }
 
                     for (int i = 0; i < _count; i++)
@@ -581,6 +582,12 @@ namespace Com.Huen.DataModel
             i80o240 = 3,
             i240o80 = 4,
             same = 5
+        }
+
+        private enum MixType
+        {
+            NORMAL,
+            FINAL
         }
     }
 }
