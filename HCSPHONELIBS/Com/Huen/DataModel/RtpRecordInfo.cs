@@ -162,9 +162,11 @@ namespace Com.Huen.DataModel
                 linout = new List<ReceivedRtp>(listOut);
             }
 
-            Com.Huen.Libs.SortRtpSeq sorting = new Com.Huen.Libs.SortRtpSeq();
-            linin.Sort(sorting);
-            linout.Sort(sorting);
+            //Com.Huen.Libs.SortRtpSeq sorting = new Com.Huen.Libs.SortRtpSeq();
+            //linin.Sort(sorting);
+            //linout.Sort(sorting);
+            linin.OrderBy(x => x.seq);
+            linout.OrderBy(x => x.seq);
 
             var itemIn = linin.FirstOrDefault();
             var itemOut = linout.FirstOrDefault();
