@@ -289,7 +289,7 @@ namespace Com.Huen.Sockets
             }
             catch (System.Net.Sockets.SocketException e)
             {
-                util.WriteLogTest2(e.ErrorCode + " : " + e.Message);
+                util.WriteLog(e.ErrorCode + " : " + e.Message);
                 threadUdpClient.Abort();
             }
         }
@@ -371,13 +371,24 @@ namespace Com.Huen.Sockets
 
                 string path = string.Format(@"{0}\{1}", Options.savedir, datepath);
 
-                if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+                try
+                {
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    util.WriteLog(string.Format("StackRtp2Instance-path: {0}", path));
+                }
+                catch (FileNotFoundException ex)
+                {
+                    util.WriteLog(string.Format("StackRtp2Instance Err : {0}", ex.Message));
+                }
 
                 RtpRecordInfo RecInstance = new RtpRecordInfo(wavformat, path, fileName) { ext = recInfo.extension, peer = recInfo.peer_number, codec = wavformat, idx = ts.TotalMilliseconds, savepath = path, filename = fileName };
 
                 RecInstance.EndOfRtpStreamEvent += RecInstance_EndOfRtpStreamEvent;
 
-                util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // RecInfo Codec : " + recInfo.codec.ToString(), fileName + "_codec");
+                // util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // RecInfo Codec : " + recInfo.codec.ToString(), fileName + "_codec");
                 RecInstance.chkcount++;
                 RecInstance.firstIsExtension = recInfo.isExtension;
 
@@ -389,15 +400,15 @@ namespace Com.Huen.Sockets
             }
             else
             {
-                if (ingInstance.chkcount == 1 && ingInstance.firstIsExtension != recInfo.isExtension)
-                {
-                    byte[] rtpbuff = new byte[recInfo.size];
-                    Array.Copy(recInfo.voice, 0, rtpbuff, 0, recInfo.size);
-                    WinSound.RTPPacket rtp = new WinSound.RTPPacket(rtpbuff);
+                //if (ingInstance.chkcount == 1 && ingInstance.firstIsExtension != recInfo.isExtension)
+                //{
+                //    byte[] rtpbuff = new byte[recInfo.size];
+                //    Array.Copy(recInfo.voice, 0, rtpbuff, 0, recInfo.size);
+                //    WinSound.RTPPacket rtp = new WinSound.RTPPacket(rtpbuff);
 
-                    util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // Structure Codec : " + recInfo.codec.ToString(), ingInstance.filename + "_codec");
-                    ingInstance.chkcount++;
-                }
+                //    util.WriteLogTest3(recInfo.isExtension.ToString() + " : >> RTPPacket Codec : " + rtp.PayloadType.ToString() + " // Structure Codec : " + recInfo.codec.ToString(), ingInstance.filename + "_codec");
+                //    ingInstance.chkcount++;
+                //}
 
                 ingInstance.Add(recInfo);
             }
@@ -473,8 +484,8 @@ namespace Com.Huen.Sockets
 
         private void FileName2DB(string fn, string ext, string peernum)
         {
-            try
-            {
+            //try
+            //{
                 using (FirebirdDBHelper db = new FirebirdDBHelper(util.strFBDBConn))
                 {
                     db.SetParameters("@EXTENTION", FbDbType.VarChar, ext);
@@ -486,6 +497,8 @@ namespace Com.Huen.Sockets
                         db.BeginTran();
                         db.ExcuteSP("INS_RECINFO");
                         db.Commit();
+
+                        util.WriteLog(string.Format("SQL INS COMPLETED (INS_RECINF) : ext={0}, caller={1}, datetime={2}\r\n", ext, peernum, DateTime.Now.ToString()));
                     }
                     catch (FbException e)
                     {
@@ -493,11 +506,11 @@ namespace Com.Huen.Sockets
                         db.Rollback();
                     }
                 }
-            }
-            catch (FbException e)
-            {
-                util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", e.Message));
-            }
+            //}
+            //catch (FbException e)
+            //{
+            //    util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", e.Message));
+            //}
         }
 
         public void Dispose()

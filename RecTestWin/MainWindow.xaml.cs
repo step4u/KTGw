@@ -42,7 +42,7 @@ namespace RecTestWin
             }
             catch (Exception ex)
             {
-                // util.WriteLog(ex.Message);
+                util.WriteLog(ex.Message);
             }
         }
 

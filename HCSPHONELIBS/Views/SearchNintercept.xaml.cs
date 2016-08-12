@@ -79,13 +79,13 @@ namespace Com.Huen.Views
 
         public Ini ReadIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
             return ini;
         }
 
         public void SaveIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}\{2}", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
 
             ini.IniWriteValue("POSITION", "top", this.Top.ToString());
             ini.IniWriteValue("POSITION", "left", this.Left.ToString());
