@@ -64,8 +64,8 @@ namespace Com.Huen.DataModel
             using (FirebirdDBHelper db = new FirebirdDBHelper(util.strFBDBConn))
             {
                 db.SetParameters("@iseq", FbDbType.Integer, cons.idx);
-                db.SetParameters("@isdate", FbDbType.TimeStamp, cons.sdate);
-                db.SetParameters("@iedate", FbDbType.TimeStamp, cons.edate);
+                db.SetParameters("@isdate", FbDbType.VarChar, cons.sdate);
+                db.SetParameters("@iedate", FbDbType.VarChar, cons.edate);
 
                 try
                 {

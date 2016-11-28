@@ -36,7 +36,8 @@ namespace Com.Huen.Views
 
         private void ReadIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
+            // Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
 
             txtRecSrvIP.Text = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "rec")) == false ? ini.IniReadValue("SERVER", "rec") : "127.0.0.1";
             txtDBSrvIP.Text = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "db")) == false ? ini.IniReadValue("SERVER", "db") : "127.0.0.1";
@@ -46,7 +47,8 @@ namespace Com.Huen.Views
 
         private void SaveIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
+            // Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
 
             ini.IniWriteValue("SERVER", "rec", txtRecSrvIP.Text.Trim());
             ini.IniWriteValue("SERVER", "db", txtDBSrvIP.Text.Trim());

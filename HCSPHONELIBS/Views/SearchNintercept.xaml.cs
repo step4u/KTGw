@@ -329,27 +329,36 @@ namespace Com.Huen.Views
             string _format = "HH:mm:ss";
             SearchConditions cons = new SearchConditions() {
                 idx = __seq,
-                sdate = DateTime.Parse(string.Format("{0} {1}", txtFromYY.Text, ((DateTime)txtFromTT.Value).ToString(_format))),
-                edate = DateTime.Parse(string.Format("{0} {1}", txtToYY.Text, ((DateTime)txtToTT.Value).ToString(_format)))
-        };
+                // sdate = DateTime.Parse(string.Format("{0} {1}", txtFromYY.Text, ((DateTime)txtFromTT.Value).ToString(_format))),
+                // edate = DateTime.Parse(string.Format("{0} {1}", txtToYY.Text, ((DateTime)txtToTT.Value).ToString(_format)))
+                sdate = string.Format("{0} {1}", txtFromYY.Text, ((DateTime)txtFromTT.Value).ToString(_format)),
+                edate = string.Format("{0} {1}", txtToYY.Text, ((DateTime)txtToTT.Value).ToString(_format))
+            };
 
-            Interviewes __interviewlists = new Interviewes(cons);
-            _interviewes = __interviewlists.GetList;
-            _interviewsViewSrc = new CollectionViewSource();
-            _interviewsViewSrc.Filter += _interviewsViewSrc_Filter;
-            _interviewsViewSrc.Source = _interviewes;
-
-            lvInterview.DataContext = _interviewsViewSrc;
-            lvInterview.SelectedIndex = 0;
-
-            // Calculate the total pages
-            _inerviewTotalPage = _interviewes.Count / _inerviewItemPerPage;
-            if (_interviewes.Count % _inerviewItemPerPage != 0)
+            try
             {
-                _inerviewTotalPage += 1;
-            }
+                Interviewes __interviewlists = new Interviewes(cons);
+                _interviewes = __interviewlists.GetList;
+                _interviewsViewSrc = new CollectionViewSource();
+                _interviewsViewSrc.Filter += _interviewsViewSrc_Filter;
+                _interviewsViewSrc.Source = _interviewes;
 
-            this.SetInterviewLVCurPage();
+                lvInterview.DataContext = _interviewsViewSrc;
+                lvInterview.SelectedIndex = 0;
+
+                // Calculate the total pages
+                _inerviewTotalPage = _interviewes.Count / _inerviewItemPerPage;
+                if (_interviewes.Count % _inerviewItemPerPage != 0)
+                {
+                    _inerviewTotalPage += 1;
+                }
+
+                this.SetInterviewLVCurPage();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
         }
 
         private bool __search1 = false;
