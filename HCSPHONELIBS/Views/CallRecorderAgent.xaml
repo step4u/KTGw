@@ -30,15 +30,16 @@
                     <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="파일 형식" VerticalAlignment="Top" Margin="15,10,0,0" FontSize="14"/>
                     <RadioButton x:Name="fileWav" Content="WAV" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,45,0,0" GroupName="savefile" IsChecked="True" Click="filetype_Click"/>
                     <RadioButton x:Name="fileMp3" Content="MP3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="136,45,0,0" GroupName="savefile" Click="filetype_Click"/>
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="디렉터리" VerticalAlignment="Top" Margin="15,90,0,0" FontSize="14"/>
-                    <TextBox x:Name="txtSelDir" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162" Margin="41,125,0,0" IsReadOnly="True"/>
-                    <Button x:Name="btnSelDir" Content="선택" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="208,125,0,0" Click="btnSelDir_Click"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="디렉터리" VerticalAlignment="Top" Margin="15,81,0,0" FontSize="14"/>
+                    <TextBox x:Name="txtSelDir" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" VerticalAlignment="Top" Width="162" Margin="41,116,0,0" IsReadOnly="True"/>
+                    <Button x:Name="btnSelDir" Content="선택" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="208,116,0,0" Click="btnSelDir_Click"/>
 
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,175,0,0" FontSize="14"><Run Language="ko-kr" Text="Database Server IP"/></TextBlock>
-                    <TextBox x:Name="txtDBip" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" MaxLength="15" VerticalAlignment="Top" Width="162" Margin="41,209,0,0"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,159,0,0" FontSize="14"><Run Language="ko-kr" Text="Database Server IP"/></TextBlock>
+                    <TextBox x:Name="txtDBip" HorizontalAlignment="Left" Height="20" TextWrapping="NoWrap" MaxLength="15" VerticalAlignment="Top" Width="162" Margin="41,193,0,0"/>
 
-                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,262,0,0" FontSize="14"><Run Language="ko-kr" Text="Call Record Agent 자동 시작"/></TextBlock>
-                    <CheckBox x:Name="chk_agentautostart" Content="Windows 시작 시 자동 실행" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,298,0,0" IsChecked="True" IsThreeState="False" Checked="chk_agentautostart_Checked" Unchecked="chk_agentautostart_Unchecked"/>
+                    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="15,240,0,0" FontSize="14"><Run Language="ko-kr" Text="Call Record Agent 자동 시작"/></TextBlock>
+                    <CheckBox x:Name="chk_agentautostart" Content="Windows 시작 시 자동 실행" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="41,276,0,0" IsChecked="True" IsThreeState="False" Checked="chk_agentautostart_Checked" Unchecked="chk_agentautostart_Unchecked"/>
+                    <Button x:Name="btnOpenEnvFile" Content="환경 설정 파일 열기" HorizontalAlignment="Left" VerticalAlignment="Top" Width="147" Margin="136,321,0,0" Click="btnOpenEnvFile_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="FTP 설정" Visibility="Collapsed">

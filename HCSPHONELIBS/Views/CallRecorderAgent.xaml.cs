@@ -272,6 +272,15 @@ namespace Com.Huen.Views
             this.SaveIni();
         }
 
+        private void btnOpenEnvFile_Click(object sender, RoutedEventArgs e) {
+            string filepath = Options.usersdatapath + "\\" + "CallRecorder.ini";
+
+            if (File.Exists(filepath))
+                System.Diagnostics.Process.Start(filepath);
+            else
+                MessageBox.Show("Environment file doesn't exist.");
+        }
+
         private void filetype_Click(object sender, RoutedEventArgs e)
         {
             RadioButton rb = (RadioButton)sender;
