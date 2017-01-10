@@ -21,7 +21,7 @@ namespace Com.Huen.Views
 
         private bool trueExit = false;
 
-        private string inifilepath = string.Format(@"{0}\{1}.ini", Options.usersdefaultpath, Options.appname);
+        private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname);
 
         public bool TrueExit
         {
@@ -69,16 +69,17 @@ namespace Com.Huen.Views
 
         private void ReadIni()
         {
-            Ini ini = new Ini(inifilepath);
+            Ini ini = new Ini(inipath);
             Options.filetype = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "filetype")) == false ? ini.IniReadValue("RECORDER", "filetype").ToLower() : "wav";
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\{1}", Options.usersdefaultpath, "RecFiles");
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\{1}", Options.usersdatapath, "RecFiles");
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "dbserverip")) == false ? ini.IniReadValue("RECORDER", "dbserverip") : "127.0.0.1";
             Options.autostart = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "autostart")) == false ? bool.Parse(ini.IniReadValue("RECORDER", "autostart")) : false;
+            Options.recextensions = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "recexts").Trim()) == false ? ini.IniReadValue("RECORDER", "recexts").Split(',') : null;
         }
 
         private void SaveIni()
         {
-            Ini ini = new Ini(inifilepath);
+            Ini ini = new Ini(inipath);
 
             ini.IniWriteValue("RECORDER", "filetype", Options.filetype);
             ini.IniWriteValue("RECORDER", "savedir", Options.savedir);

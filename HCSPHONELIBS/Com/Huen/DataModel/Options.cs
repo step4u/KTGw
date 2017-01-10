@@ -18,6 +18,7 @@ namespace Com.Huen.DataModel
         private static string _savedir = string.Empty;
         public static string filetype { get; set; }
         public static bool autostart { get; set; }
+        public static String[] recextensions;
 
         public static string companyname
         {
@@ -36,7 +37,9 @@ namespace Com.Huen.DataModel
         {
             get
             {
-                if (string.IsNullOrEmpty(_appname)) _appname = "CallRecorder";
+                if (string.IsNullOrEmpty(_appname))
+                    _appname = "CallRecorder";
+
                 return _appname;
             }
             set
@@ -49,7 +52,8 @@ namespace Com.Huen.DataModel
         {
             get
             {
-                if (string.IsNullOrEmpty(_usersdefaultpath)) _usersdefaultpath = string.Format(@"{0}\{1}", @"C:\Users\Default\AppData\Roaming", Options.companyname);
+                if (string.IsNullOrEmpty(_usersdefaultpath))
+                    _usersdefaultpath = string.Format(@"{0}\{1}", @"C:\Users\Default\AppData\Roaming", Options.companyname);
 
                 if (!Directory.Exists(_usersdefaultpath))
                     Directory.CreateDirectory(_usersdefaultpath);
@@ -69,7 +73,8 @@ namespace Com.Huen.DataModel
         {
             get
             {
-                if (string.IsNullOrEmpty(_usersdatapath)) _usersdatapath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname);
+                if (string.IsNullOrEmpty(_usersdatapath))
+                    _usersdatapath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname);
 
                 if (!Directory.Exists(_usersdatapath))
                     Directory.CreateDirectory(_usersdatapath);
@@ -101,7 +106,8 @@ namespace Com.Huen.DataModel
         {
             get
             {
-                if (string.IsNullOrEmpty(_savedir)) _savedir = string.Format(@"{0}\RecFiles", usersdatapath);
+                if (string.IsNullOrEmpty(_savedir))
+                    _savedir = string.Format(@"{0}\RecFiles", usersdatapath);
 
                 return _savedir;
             }

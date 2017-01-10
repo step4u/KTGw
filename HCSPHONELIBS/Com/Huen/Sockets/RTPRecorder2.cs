@@ -21,7 +21,7 @@ namespace Com.Huen.Sockets
 {
     public class RTPRecorder2 : IDisposable
     {
-        private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdefaultpath, Options.appname);
+        private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname);
 
         private UdpClient client = null;
         private Socket sockRTPSrv = null;
@@ -50,13 +50,9 @@ namespace Com.Huen.Sockets
         private List<InterceptorClient> rtpRedirectClientList = new List<InterceptorClient>();
         // private List<IPEndPoint> fileClientList = new List<IPEndPoint>();
 
-        public RTPRecorder2() : this (21010, 1)
-        {
-        }
+        public RTPRecorder2() : this (21010, 1) { }
 
-        public RTPRecorder2(int port) : this (port, 1)
-        {
-        }
+        public RTPRecorder2(int port) : this (port, 1) { }
 
         public RTPRecorder2(int port, int threadcount)
         {
@@ -84,7 +80,7 @@ namespace Com.Huen.Sockets
             Ini ini = new Ini(inipath);
 
             Options.filetype = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "filetype").ToLower()) == false ? ini.IniReadValue("RECORDER", "filetype").ToLower() : "wav";
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.usersdefaultpath);
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.usersdatapath);
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "dbserverip")) == false ? ini.IniReadValue("RECORDER", "dbserverip") : "127.0.0.1";
         }
 
@@ -94,7 +90,7 @@ namespace Com.Huen.Sockets
             Ini ini = new Ini(inipath);
 
             Options.filetype = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "filetype").ToLower()) == false ? ini.IniReadValue("RECORDER", "filetype").ToLower() : "wav";
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.usersdefaultpath);
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.usersdatapath);
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "dbserverip")) == false ? ini.IniReadValue("RECORDER", "dbserverip") : "127.0.0.1";
 
             Thread.Sleep(3000);
@@ -297,6 +293,9 @@ namespace Com.Huen.Sockets
         private void RtpReceive(byte[] buffer)
         {
             RecordInfo_t recInfo = util.GetObject<RecordInfo_t>(buffer);
+
+            if (!Options.recextensions.Contains(recInfo.extension)) return;
+
             int nDataSize = recInfo.size - 12;
             if (nDataSize != 80 && nDataSize != 160 && nDataSize != 240 && nDataSize != -12) return;
 
@@ -377,7 +376,7 @@ namespace Com.Huen.Sockets
                     {
                         Directory.CreateDirectory(path);
                     }
-                    util.WriteLog(string.Format("StackRtp2Instance-path: {0}", path));
+                    // util.WriteLog(string.Format("StackRtp2Instance-path: {0}", path));
                 }
                 catch (FileNotFoundException ex)
                 {
