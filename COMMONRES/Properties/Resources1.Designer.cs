@@ -88,7 +88,7 @@ namespace COMMONRES.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User=USER1; Password=omega936; Database=&apos;{0}&apos;; DataSource={1}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0.
+        ///   Looks up a localized string similar to User=USER1; Password=core9158; Database=&apos;C:\FBDB\FBRECORDING.FDB&apos;; DataSource={1}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0.
         /// </summary>
         internal static string DBCONSTR_FBSQL {
             get {
@@ -97,7 +97,7 @@ namespace COMMONRES.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User=USER1;Password=omega936;Database=&apos;C:\FBDB\FBRECORDING.FDB&apos;;DataSource={0};Port=3050;Dialect=3;Charset=KSC_5601;Role=;Connection lifetime=15;Pooling=true;Packet Size=8192;ServerType=0.
+        ///   Looks up a localized string similar to User=USER1; Password=core9158; Database=&apos;C:\FBDB\FBRECORDING.FDB&apos;; DataSource={0}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0.
         /// </summary>
         internal static string DBCONSTR_FBSQL2 {
             get {

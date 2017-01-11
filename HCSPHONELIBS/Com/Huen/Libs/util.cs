@@ -602,8 +602,7 @@ namespace Com.Huen.Libs
             get
             {
                 string tmpstr = LoadProjectResource("DBCONSTR_FBSQL", "COMMONRES", "").ToString();
-                //WriteLog(tmpstr);
-                return string.Format(tmpstr, Options.dbserverip);
+                return string.Format(tmpstr, Options.usersdatapath, Options.dbserverip);
             }
         }
 
@@ -612,7 +611,6 @@ namespace Com.Huen.Libs
             get
             {
                 string tmpstr = LoadProjectResource("DBCONSTR_FBSQL2", "COMMONRES", "").ToString();
-                //WriteLog(tmpstr);
                 return string.Format(tmpstr, Options.dbserverip);
             }
         }
