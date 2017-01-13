@@ -21,7 +21,7 @@ namespace Com.Huen.Sockets
 {
     public class RTPRecorder2 : IDisposable
     {
-        private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname);
+        private string inipath = string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName);
 
         private UdpClient client = null;
         private Socket sockRTPSrv = null;
@@ -80,8 +80,11 @@ namespace Com.Huen.Sockets
             Ini ini = new Ini(inipath);
 
             Options.filetype = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "filetype").ToLower()) == false ? ini.IniReadValue("RECORDER", "filetype").ToLower() : "wav";
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.usersdatapath);
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\RecFiles", Options.ProgramDataPath);
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "dbserverip")) == false ? ini.IniReadValue("RECORDER", "dbserverip") : "127.0.0.1";
+            Options.recextensions = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "recexts").Trim()) == false ? ini.IniReadValue("RECORDER", "recexts").Split(',') : null;
+
+            // util.WriteLogTest2("Options.UserAppdataPath: " + Options.UserAppdataPath);
         }
 
         /*
@@ -294,7 +297,8 @@ namespace Com.Huen.Sockets
         {
             RecordInfo_t recInfo = util.GetObject<RecordInfo_t>(buffer);
 
-            if (!Options.recextensions.Contains(recInfo.extension)) return;
+            if (Options.recextensions != null)
+                if (!Options.recextensions.Contains(recInfo.extension)) return;
 
             int nDataSize = recInfo.size - 12;
             if (nDataSize != 80 && nDataSize != 160 && nDataSize != 240 && nDataSize != -12) return;
@@ -369,7 +373,7 @@ namespace Com.Huen.Sockets
                 string fileName = string.Format("{0}_{1}_{2}.wav", header, recInfo.extension, recInfo.peer_number);
 
                 string path = string.Format(@"{0}\{1}", Options.savedir, datepath);
-
+                    
                 try
                 {
                     if (!Directory.Exists(path))
@@ -475,7 +479,6 @@ namespace Com.Huen.Sockets
             catch (Exception e)
             {
                 util.WriteLog(e.Message);
-                //throw e;
             }
 
             return mp3fn;
@@ -483,8 +486,8 @@ namespace Com.Huen.Sockets
 
         private void FileName2DB(string fn, string ext, string peernum)
         {
-            //try
-            //{
+            try
+            {
                 using (FirebirdDBHelper db = new FirebirdDBHelper(util.strFBDBConn))
                 {
                     db.SetParameters("@EXTENTION", FbDbType.VarChar, ext);
@@ -501,15 +504,15 @@ namespace Com.Huen.Sockets
                     }
                     catch (FbException e)
                     {
-                        util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", e.Message));
                         db.Rollback();
+                        util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", e.Message));
                     }
                 }
-            //}
-            //catch (FbException e)
-            //{
-            //    util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", e.Message));
-            //}
+            }
+            catch (FbException ex)
+            {
+                util.WriteLog(string.Format("SQL INS ERROR (INS_RECINF)\r\nMessage : {0}", ex.Message));
+            }
         }
 
         public void Dispose()

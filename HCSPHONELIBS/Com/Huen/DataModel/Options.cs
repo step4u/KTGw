@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
+using Microsoft.Win32;
 
 namespace Com.Huen.DataModel
 {
@@ -10,8 +11,9 @@ namespace Com.Huen.DataModel
     {
         private static string _companyname = string.Empty;
         private static string _appname = string.Empty;
-        private static string _usersdefaultpath = string.Empty;
-        private static string _usersdatapath = string.Empty;
+        private static string _userdefaultpath = string.Empty;
+        private static string _userappdatapath = string.Empty;
+        private static string _programdatapath = string.Empty;
         public static string recserverip { get; set; }
         private static string _dbserverip = "127.0.0.1";
         public static string pbxip { get; set; }
@@ -20,7 +22,7 @@ namespace Com.Huen.DataModel
         public static bool autostart { get; set; }
         public static String[] recextensions;
 
-        public static string companyname
+        public static string CompanyName
         {
             get
             {
@@ -33,7 +35,7 @@ namespace Com.Huen.DataModel
             }
         }
 
-        public static string appname
+        public static string AppName
         {
             get
             {
@@ -48,45 +50,76 @@ namespace Com.Huen.DataModel
             }
         }
 
-        public static string usersdefaultpath
+        public static string UserDefaultPath
         {
             get
             {
-                if (string.IsNullOrEmpty(_usersdefaultpath))
-                    _usersdefaultpath = string.Format(@"{0}\{1}", @"C:\Users\Default\AppData\Roaming", Options.companyname);
+                if (string.IsNullOrEmpty(_userdefaultpath))
+                {
+                    using (RegistryKey profileListKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList"))
+                    {
+                        _userdefaultpath = string.Format(@"{0}\AppData\Roaming\{2}", profileListKey.GetValue("Default").ToString(), CompanyName);
+                    }
+                }
 
-                if (!Directory.Exists(_usersdefaultpath))
-                    Directory.CreateDirectory(_usersdefaultpath);
+                if (!Directory.Exists(_userdefaultpath))
+                    Directory.CreateDirectory(_userdefaultpath);
 
-                return _usersdefaultpath;
+                return _userdefaultpath;
             }
             set
             {
                 if (!Directory.Exists(value))
                     Directory.CreateDirectory(value);
 
-                _usersdefaultpath = value;
+                _userdefaultpath = value;
             }
         }
 
-        public static string usersdatapath
+        public static string UserAppdataPath
         {
             get
             {
-                if (string.IsNullOrEmpty(_usersdatapath))
-                    _usersdatapath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname);
+                if (string.IsNullOrEmpty(_userappdatapath))
+                    _userappdatapath = string.Format(@"{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), CompanyName);
 
-                if (!Directory.Exists(_usersdatapath))
-                    Directory.CreateDirectory(_usersdatapath);
+                if (!Directory.Exists(_userappdatapath))
+                    Directory.CreateDirectory(_userappdatapath);
 
-                return _usersdatapath;
+                return _userappdatapath;
             }
             set
             {
                 if (!Directory.Exists(value))
                     Directory.CreateDirectory(value);
 
-                _usersdatapath = value;
+                _userappdatapath = value;
+            }
+        }
+
+        public static string ProgramDataPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(_programdatapath))
+                {
+                    using (RegistryKey profileListKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion\ProfileList"))
+                    {
+                        _programdatapath = string.Format(@"{0}\{1}", profileListKey.GetValue("ProgramData").ToString(), CompanyName);
+                    }
+                }
+
+                if (!Directory.Exists(_programdatapath))
+                    Directory.CreateDirectory(_programdatapath);
+
+                return _programdatapath;
+            }
+            set
+            {
+                if (!Directory.Exists(value))
+                    Directory.CreateDirectory(value);
+
+                _programdatapath = value;
             }
         }
 
@@ -107,7 +140,7 @@ namespace Com.Huen.DataModel
             get
             {
                 if (string.IsNullOrEmpty(_savedir))
-                    _savedir = string.Format(@"{0}\RecFiles", usersdatapath);
+                    _savedir = string.Format(@"{0}\RecFiles", UserAppdataPath);
 
                 return _savedir;
             }

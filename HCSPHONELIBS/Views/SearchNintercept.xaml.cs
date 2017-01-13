@@ -79,13 +79,13 @@ namespace Com.Huen.Views
 
         public Ini ReadIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName));
             return ini;
         }
 
         public void SaveIni()
         {
-            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName));
 
             ini.IniWriteValue("POSITION", "top", this.Top.ToString());
             ini.IniWriteValue("POSITION", "left", this.Left.ToString());
@@ -98,7 +98,7 @@ namespace Com.Huen.Views
             ini.IniWriteValue("SERVER", "rec", Options.recserverip);
             ini.IniWriteValue("SERVER", "db", Options.dbserverip);
             ini.IniWriteValue("SERVER", "pbx", Options.pbxip);
-            ini.IniWriteValue("ETC", "savedir", Options.savedir);
+            ini.IniWriteValue("MORNITOR", "downdir", Options.savedir);
         }
 
         private void InitilaizeWindow()
@@ -115,7 +115,7 @@ namespace Com.Huen.Views
             Options.recserverip = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "rec")) == true ? "127.0.0.1" : ini.IniReadValue("SERVER", "rec");
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "db")) == true ? "127.0.0.1" : ini.IniReadValue("SERVER", "db");
             Options.pbxip = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "pbx")) == true ? "127.0.0.1" : ini.IniReadValue("SERVER", "pbx");
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("ETC", "savedir")) == false ? ini.IniReadValue("ETC", "savedir") : string.Format(@"{0}\{1}", Options.usersdatapath, "RecDown");
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("MORNITOR", "downdir")) == false ? ini.IniReadValue("MORNITOR", "downdir") : string.Format(@"{0}\{1}", Options.ProgramDataPath, "RecDown");
 #if false
             if (!_isregistered)
             {

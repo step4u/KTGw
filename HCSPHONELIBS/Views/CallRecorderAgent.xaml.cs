@@ -21,7 +21,7 @@ namespace Com.Huen.Views
 
         private bool trueExit = false;
 
-        private string inipath = string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname);
+        private string inipath = string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName);
 
         public bool TrueExit
         {
@@ -71,7 +71,7 @@ namespace Com.Huen.Views
         {
             Ini ini = new Ini(inipath);
             Options.filetype = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "filetype")) == false ? ini.IniReadValue("RECORDER", "filetype").ToLower() : "wav";
-            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\{1}", Options.usersdatapath, "RecFiles");
+            Options.savedir = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "savedir")) == false ? ini.IniReadValue("RECORDER", "savedir") : string.Format(@"{0}\{1}", Options.ProgramDataPath, "RecFiles");
             Options.dbserverip = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "dbserverip")) == false ? ini.IniReadValue("RECORDER", "dbserverip") : "127.0.0.1";
             Options.autostart = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "autostart")) == false ? bool.Parse(ini.IniReadValue("RECORDER", "autostart")) : false;
             Options.recextensions = string.IsNullOrEmpty(ini.IniReadValue("RECORDER", "recexts").Trim()) == false ? ini.IniReadValue("RECORDER", "recexts").Split(',') : null;
@@ -273,7 +273,7 @@ namespace Com.Huen.Views
         }
 
         private void btnOpenEnvFile_Click(object sender, RoutedEventArgs e) {
-            string filepath = Options.usersdatapath + "\\" + "CallRecorder.ini";
+            string filepath = Options.ProgramDataPath + "\\" + "CallRecorder.ini";
 
             if (File.Exists(filepath))
                 System.Diagnostics.Process.Start(filepath);

@@ -242,7 +242,7 @@
     <value>비밀번호를 입력해 주세요.</value>
   </data>
   <data name="DBCONSTR_FBSQL" xml:space="preserve">
-    <value>User=USER1; Password=core9158; Database='C:\FBDB\FBRECORDING.FDB'; DataSource={1}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0</value>
+    <value>User=USER1; Password=core9158; Database='{0}\KTGW.FDB'; DataSource={1}; Port=3050; Dialect=3; Charset=KSC_5601; Role=; Connection lifetime=15; Pooling=true; Packet Size=8192; ServerType=0</value>
   </data>
   <data name="TEXT_TREE_DEPART_ROOT" xml:space="preserve">
     <value>부서명</value>

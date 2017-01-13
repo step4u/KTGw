@@ -24,8 +24,8 @@ namespace Com.Huen.Sockets
 
         public FileTransferServer()
         {
-            Options.companyname = "Coretree";
-            Options.appname = "Call Recorder";
+            //Options.CompanyName = "Coretree";
+            //Options.AppName = "CallRecorder";
 
             this.ReadIni();
 

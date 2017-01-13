@@ -11,6 +11,7 @@ using System.IO;
 
 using Com.Huen.Libs;
 using Com.Huen.Sockets;
+using Microsoft.Win32;
 
 namespace CallRecorder
 {
@@ -26,21 +27,21 @@ namespace CallRecorder
 
         protected override void OnStart(string[] args)
         {
-            System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
-            // util.WriteLogTest2(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData));
+            // System.IO.Directory.SetCurrentDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
+            //util.WriteLogTest2(Path.GetPathRoot(Environment.SystemDirectory));
 
-            //try
-            //{
+            try
+            {
                 recorder = new RTPRecorder2();
                 //_recorder.StartCmdSrv();
                 //_recorder.StartRtpRedirectSrv();
 
                 filesrv = new FileTransferServer();
-            //}
-            //catch (Exception ex)
-            //{
-            //    util.WriteLog(ex.Message);
-            //}
+            }
+            catch (Exception ex)
+            {
+                util.WriteLog(ex.Message);
+            }
         }
 
         protected override void OnStop()

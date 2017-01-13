@@ -36,24 +36,22 @@ namespace Com.Huen.Views
 
         private void ReadIni()
         {
-            // Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
-            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName));
 
             txtRecSrvIP.Text = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "rec")) == false ? ini.IniReadValue("SERVER", "rec") : "127.0.0.1";
             txtDBSrvIP.Text = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "db")) == false ? ini.IniReadValue("SERVER", "db") : "127.0.0.1";
             txtPbxSrvIP.Text = string.IsNullOrEmpty(ini.IniReadValue("SERVER", "pbx")) == false ? ini.IniReadValue("SERVER", "pbx") : "127.0.0.1";
-            txtSelDir.Text = string.IsNullOrEmpty(ini.IniReadValue("ETC", "savedir")) == false ? ini.IniReadValue("ETC", "savedir") : string.Format(@"{0}\{1}", Options.usersdatapath, "RecFiles");
+            txtSelDir.Text = string.IsNullOrEmpty(ini.IniReadValue("MORNITOR", "downdir")) == false ? ini.IniReadValue("MORNITOR", "downdir") : string.Format(@"{0}\{1}", Options.ProgramDataPath, "RecFiles");
         }
 
         private void SaveIni()
         {
-            // Ini ini = new Ini(string.Format(@"{0}\{1}\{2}.ini", Options.usersdatapath, Options.appname));
-            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.usersdatapath, Options.appname));
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName));
 
             ini.IniWriteValue("SERVER", "rec", txtRecSrvIP.Text.Trim());
             ini.IniWriteValue("SERVER", "db", txtDBSrvIP.Text.Trim());
             ini.IniWriteValue("SERVER", "pbx", txtPbxSrvIP.Text.Trim());
-            ini.IniWriteValue("ETC", "savedir", Options.savedir);
+            ini.IniWriteValue("MORNITOR", "downdir", Options.savedir);
 
             Options.recserverip = txtRecSrvIP.Text.Trim();
             Options.dbserverip = txtDBSrvIP.Text.Trim();
@@ -164,8 +162,8 @@ namespace Com.Huen.Views
 
             Options.savedir = txtSelDir.Text;
 
-            Ini ini = new Ini(@".\properties.ini");
-            ini.IniWriteValue("ETC", "savedir", txtSelDir.Text);
+            Ini ini = new Ini(string.Format(@"{0}\{1}.ini", Options.ProgramDataPath, Options.AppName));
+            ini.IniWriteValue("MORNITOR", "downdir", txtSelDir.Text);
         }
         #endregion 환경설정 e
 

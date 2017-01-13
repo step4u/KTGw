@@ -13,6 +13,7 @@ using System.Windows.Controls;
 
 using Com.Huen.Sockets;
 using Com.Huen.DataModel;
+using System.Diagnostics;
 
 namespace Com.Huen.Libs
 {
@@ -413,7 +414,7 @@ namespace Com.Huen.Libs
 
         public static void WriteLogTest(string msg)
         {
-            string userdatapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname, Options.appname);
+            string userdatapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.CompanyName, Options.AppName);
 
             string logpath = @"D:\logtest";
 
@@ -450,7 +451,7 @@ namespace Com.Huen.Libs
         public static void WriteLogTest3(string msg, string fn)
         {
             DateTime now = DateTime.Now;
-            string logpath = string.Format(@"{0}\{1}\{2}-{3:00}-{4:00}", Options.usersdefaultpath, "log", now.Year, now.Month, now.Day);
+            string logpath = string.Format(@"{0}\{1}\{2}-{3:00}-{4:00}", Options.UserDefaultPath, "log", now.Year, now.Month, now.Day);
 
             if (!Directory.Exists(logpath))
                 Directory.CreateDirectory(logpath);
@@ -468,12 +469,14 @@ namespace Com.Huen.Libs
 
         public static void WriteLog(string msg)
         {
-            string userdatapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname, Options.appname);
+            // string datapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), Options.companyname, Options.appname);
+            string datapath = string.Format(@"{0}\{1}", Options.ProgramDataPath, Options.AppName);
 
-            //if (!Directory.Exists(userdatapath))
-            //    Directory.CreateDirectory(userdatapath);
 
-            string logpath = string.Format(@"{0}\{1}", userdatapath, "log");
+            //if (!Directory.Exists(datapath))
+            //    Directory.CreateDirectory(datapath);
+
+            string logpath = string.Format(@"{0}\{1}", datapath, "log");
 
             if (!Directory.Exists(logpath))
                 Directory.CreateDirectory(logpath);
@@ -500,12 +503,13 @@ namespace Com.Huen.Libs
 
         public static void WriteLog(int errcode, string msg)
         {
-            string userdatapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname, Options.appname);
+            // string userdatapath = string.Format(@"{0}\{1}\{2}", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Options.companyname, Options.appname);
+            string datapath = string.Format(@"{0}\{1}", Options.ProgramDataPath, Options.AppName);
 
             //if (!Directory.Exists(userdatapath))
             //    Directory.CreateDirectory(userdatapath);
 
-            string logpath = string.Format(@"{0}\{1}", userdatapath, "log");
+            string logpath = string.Format(@"{0}\{1}", datapath, "log");
 
             if (!Directory.Exists(logpath))
                 Directory.CreateDirectory(logpath);
@@ -602,7 +606,8 @@ namespace Com.Huen.Libs
             get
             {
                 string tmpstr = LoadProjectResource("DBCONSTR_FBSQL", "COMMONRES", "").ToString();
-                return string.Format(tmpstr, Options.usersdatapath, Options.dbserverip);
+                string str = string.Format(tmpstr, Options.ProgramDataPath, Options.dbserverip);
+                return str;
             }
         }
 
@@ -754,6 +759,42 @@ namespace Com.Huen.Libs
                 catch (Exception) { }
 
             }
+        }
+
+        public static string GetErrorMessage(FirebirdSql.Data.FirebirdClient.FbException ex)
+        {
+            string message = string.Empty;
+
+            switch (ex.ErrorCode)
+            {
+                case 335544466:
+                    message = "해당 내선의 기록이 남아 있어 삭제할 수 없습니다.\r\n먼저 해당 내선의 기록을 모두 삭제 후 다시 시도해 주세요.";
+                    break;
+                default:
+                    message = ex.Message;
+                    break;
+            }
+
+            return message;
+        }
+
+        public static string GetCommandOutPutMessage(string command)
+        {
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd", "/c " + command)
+            {
+                WindowStyle = ProcessWindowStyle.Hidden,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                CreateNoWindow = true
+            };
+            StringBuilder sb = new StringBuilder();
+            Process process = Process.Start(startInfo);
+            process.OutputDataReceived += (sender, e) => sb.Append(e.Data);
+            process.BeginOutputReadLine();
+            process.Start();
+            process.WaitForExit();
+
+            return sb.ToString();
         }
     }
 }

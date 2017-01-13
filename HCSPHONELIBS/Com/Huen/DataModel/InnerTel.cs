@@ -175,6 +175,7 @@ namespace Com.Huen.DataModel
                 catch (FirebirdSql.Data.FirebirdClient.FbException fe)
                 {
                     db.Rollback();
+                    MessageBox.Show(util.GetErrorMessage(fe));
                 }
             }
         }
