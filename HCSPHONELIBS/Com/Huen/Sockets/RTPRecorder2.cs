@@ -440,7 +440,8 @@ namespace Com.Huen.Sockets
 
                 lock (RecordIngList)
                 {
-                    RecordIngList.Remove(ingdata);
+                    // RecordIngList.Remove(ingdata);
+                    RecordIngList.RemoveAll(x=> x.ext == ingdata.ext && x.peer == ingdata.peer);
                 }
 
                 ingdata.Dispose();

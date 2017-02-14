@@ -575,6 +575,18 @@ namespace Com.Huen.DataModel
             {
                 listOut.Clear(); listOut = null;
             }
+
+            if (timer != null)
+            {
+                timer.Enabled = false;
+                timer.Close();
+            }
+
+            if (endtimer != null)
+            {
+                endtimer.Enabled = false;
+                endtimer.Close();
+            }
         }
 
         private enum DelayedMil
