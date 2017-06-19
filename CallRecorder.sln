@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COMMONRES", "COMMONRES\COMMONRES.csproj", "{478F73B6-4103-41EF-9CD1-085335C51FE5}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallInterceptor", "CallInterceptor\CallInterceptor.csproj", "{6CC09F6E-F676-442E-A72E-D82EBDFB8450}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CallRecorder", "CallRecorder\CallRecorder.csproj", "{DC10FBC7-49D3-4992-A9B7-E2B213F59540}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixAudio", "FixAudio\FixAudio.csproj", "{349A6115-EEF9-4972-9A89-108F2ABA8411}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC10FBC7-49D3-4992-A9B7-E2B213F59540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{349A6115-EEF9-4972-9A89-108F2ABA8411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{349A6115-EEF9-4972-9A89-108F2ABA8411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{349A6115-EEF9-4972-9A89-108F2ABA8411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{349A6115-EEF9-4972-9A89-108F2ABA8411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
